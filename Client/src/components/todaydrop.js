@@ -9,13 +9,13 @@ class TodayDrop extends Component {
   }
 
   renderSlots() {
-    if(this.props.array){
-      return this.props.array.map((slot) => {
+    if(this.props.drops){
+      return this.props.drops.map((slot) => {
         return (
           <li className="list-group-item" key={slot.name}>
             <h3>{slot.name}</h3>
             <p>{slot.email}</p>
-            <p>학교: {slot.profile.school} 학과: {slot.profile.major}</p>
+            <p>학교: {slot.detail.school} 학과: {slot.detail.major}</p>
           </li>
         );
       });
@@ -36,7 +36,7 @@ class TodayDrop extends Component {
 }
 
 function mapStateToProps (state){
-  return { array: state.auth.array};
+  return { drops: state.auth.array};
 }
 
 //이거 끝에를 꼭 바꿔줘야 함.

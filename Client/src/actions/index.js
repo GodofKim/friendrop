@@ -89,7 +89,7 @@ export function fetchArray() {
     .then(response => {
       dispatch({
         type: FETCH_ARRAY,
-        payload: response.data.array
+        payload: response.data.drops
       });
     })
     .catch(error => {
