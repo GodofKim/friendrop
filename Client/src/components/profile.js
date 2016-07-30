@@ -22,5 +22,5 @@ function mapStateToProps (state){
   return { message: state.auth.message};
 }
 
-//이거 끝에를 꼭 바꿔줘야 함. 
+//이거 끝에를 꼭 바꿔줘야 함.
 export default connect(mapStateToProps, actions)(Profile);
