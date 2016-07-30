@@ -34,6 +34,7 @@ router.get('/', requireAuth , (req, res, next)=>{
   res.send({ message: "서버로부터 보내지는 메시지입니다."});
 });
 
+
 //임시 응답. 객체 배열 보냄.
 router.get('/array', requireAuth, (req, res, next)=>{
   //왜 id로 찾으니까 안되냐. 아하. _id 니까 Id로 해야하는구나.
@@ -42,7 +43,7 @@ router.get('/array', requireAuth, (req, res, next)=>{
     //하 이것때문에 몇시간을 해맨 거야 ㅁㅊ
     const temp = JSON.parse(JSON.stringify(user));
     const profile = temp.drops;
-    
+
     res.json({ drops: profile });
   });//req.user가 정보를 왜이리 많이 가지고 있지?? 이럴거면 그냥 프론트에서 다 처리해도 될정도.
 });
