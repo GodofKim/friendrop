@@ -12,6 +12,11 @@ import Logout from './components/auth/logout';
 import Signup from './components/auth/signup';
 import Feature from './components/feature';
 import RequireAuth from './components/auth/require_auth';
+import Profile from './components/profile';
+import TodayDrop from './components/todaydrop';
+import Letter from './components/letter';
+import Contact from './components/contact';
+
 import reducers from './reducers';
 import { AUTH_USER } from './actions/type';
 
@@ -35,6 +40,10 @@ ReactDOM.render(
         <Route path="signup" component={Signup}/>
 
         <Route path="feature" component={RequireAuth(Feature)}/>
+        <Route path="profile" component={RequireAuth(Profile)}/>
+        <Route path="todaydrop" component={RequireAuth(TodayDrop)}/>
+        <Route path="letter" component={RequireAuth(Letter)}/>
+        <Route path="contact" component={RequireAuth(Contact)}/>
       </Route>
     </Router>
   </Provider>
