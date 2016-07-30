@@ -13,6 +13,6 @@ router.post('/signin', requireSignin, Authentication.signin);
 
 // 앞으로 auth가 필요한 라우트로 갈때마다  requireAuth를 넣어주면 된다.
 router.get('/', requireAuth , (req, res, next)=>{
-  res.send({ message: "I am the sword master!!"});
+  res.send({ message: "서버로부터 보내지는 메시지입니다."});
 });
 module.exports = router;
