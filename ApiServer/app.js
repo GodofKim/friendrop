@@ -72,10 +72,3 @@ app.listen(port,()=>{
 });
 
 module.exports = app;
-<<<<<<< HEAD
-// merge test를 위한 주석주석.
-=======
-//IDONEODFNLSDKFJLKDJFLKSDJFKSFJKLDSJKJDFKSDJFLKFJDSK
-//224422342
-//342423434
->>>>>>> 51e45dcbd569e8fb1d921188e41e4d0382af35d7
