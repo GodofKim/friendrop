@@ -10,11 +10,11 @@ import Welcome from './components/welcome';
 import Login from './components/auth/login';
 import Logout from './components/auth/logout';
 import Signup from './components/auth/signup';
-import Feature from './components/feature';
+import Feature from './containers/feature';
 import RequireAuth from './components/auth/require_auth';
-import Profile from './components/profile';
-import TodayDrop from './components/todaydrop';
-import Letter from './components/letter';
+import Profile from './containers/profile';
+import TodayDrop from './containers/todaydrop';
+import Letter from './containers/letter';
 import Contact from './components/contact';
 
 import reducers from './reducers';
