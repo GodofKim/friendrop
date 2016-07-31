@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
-import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, FETCH_MESSAGE} from './type';
+import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, FETCH_MESSAGE, FETCH_ARRAY} from './type';
 
 const ROOT_URL = 'http://localhost:3000';
 
@@ -80,6 +80,39 @@ export function fetchMessage() {
     });
   }
 }
+
+export function fetchArray() {
+  return function (dispatch){
+    axios.get(`${ROOT_URL}/array`, {
+      headers: { authorization: localStorage.getItem('token')}
+    })
+    .then(response => {
+      dispatch({
+        type: FETCH_ARRAY,
+        payload: response.data.drops
+      });
+    })
+    .catch(error => {
+      console.log(error.response);
+    });
+  }
+}
+
+/*
+export function fetchArray() {
+  const request = axios.get(`${ROOT_URL}/array`, {
+    headers: { authorization: localStorage.getItem('token')}
+  });
+
+  console.log(request);
+
+  return {
+    type: FETCH_ARRAY,
+    payload: request
+  };
+}
+*/
+
 
 //  강사는 위의  redux-thunk 보단 아래 방식을 더 선호함
 // 이렇게 쓰려면 redux-promise를 써야한다?? 만약 그거 쓰고 싶으면 src/index.js 에 미들웨어 쓴다고 넣으시길.

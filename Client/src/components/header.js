@@ -7,11 +7,23 @@ class Header extends Component {
   renderLinks(){
     if(this.props.authenticated){
       //show a link to sign out
-      return (
-        <li className="nav-item">
-          <Link className="nav-link" to="/logout">로그아웃</Link>
-        </li>
-      );
+      return [
+          <li className="nav-item" key={1}>
+            <Link className="nav-link" to="/profile">프로필</Link>
+          </li>,
+          <li className="nav-item" key={2}>
+            <Link className="nav-link" to="/todaydrop">오늘의 드랍</Link>
+          </li>,
+          <li className="nav-item" key={3}>
+            <Link className="nav-link" to="/letter">쪽지</Link>
+          </li>,
+          <li className="nav-item" key={4}>
+            <Link className="nav-link" to="/contact">연락처</Link>
+          </li>,
+          <li className="nav-item" key={5}>
+            <Link className="nav-link" to="/logout">로그아웃</Link>
+          </li>
+      ];
     }else {
       //show a link to log in or sign up
       return [
