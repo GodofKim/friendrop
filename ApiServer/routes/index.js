@@ -8,22 +8,7 @@ const requireAuth = passport.authenticate('jwt', { session: false});
 const requireSignin = passport.authenticate('local', {session:false});
 
 const User = require('../models/user');
-
-const tempArray = [
-  { "name":  "원빈",
-    "email": "wonbin@gmail.com",
-    "profile": { "school": "원빈대", "major": "원빈학과"}
-  },
-  { "name": "현빈",
-    "email": "hyeonbin@gmail.com",
-    "profile": { "school": "시크릿대", "major": "가든학과"}
-  },
-  { "name": "나얼",
-    "email": "naul@gmail.com",
-    "profile": { "school": "소울대", "major": "공명학과"}
-  }
-];
-
+const Drop = require('../models/drop');
 
 router.post('/signup', Authentication.signup);
 // requireSignin이 req를 먼저 낚아채도록 이렇게 해준다??? 먼소리고
@@ -52,6 +37,16 @@ router.get('/array', requireAuth, (req, res, next)=>{
   // 이 페이지로 요청할 할때만 정보를 가져오니까 차라리 패스포트가 가져온 정보를 이용하는 게 낫지 않나.
   // 아니다 아니야!!! 클라이언트가 몇초에 한번씩 계속 요청을 하도록 만드는 게 낫지 않을까. 이건 '웹사이트'가 아니라
   // '애플리케이션'이라고. => 그렇게 만들었다. 하하.
+});
+
+router.get('/drops', requireAuth, (req, res, next) => {
+  Drop.find({host: req.user._id}, (err, drops) => {
+    if(err) throw err;
+
+    const temp = JSON.parse(JSON.stringify(drops));
+
+    res.json({drops: temp});
+  })
 });
 
 module.exports = router;

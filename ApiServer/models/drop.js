@@ -11,7 +11,7 @@ const dropSchema = new Schema({
 
 // Create the model class
 //이름을 model로 하면 국소적인거고 이렇게 하면 모든 유저를 위한거??
-const ModelClass = mongoose.model('drop', userSchema);//몽구스야 user (콜렉션이름)을 위한 스키마야!
+const ModelClass = mongoose.model('drop', dropSchema);//몽구스야 user (콜렉션이름)을 위한 스키마야!
 
 // Export the model
 module.exports = ModelClass;
