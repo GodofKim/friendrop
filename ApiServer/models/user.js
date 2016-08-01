@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt-nodejs');
 
-mongoose.connect('mongodb://Godof:horol123@ds029117.mlab.com:29117/apiserver');
+
 
 const dropSchema = new Schema({ name: String, email: String, detail : { school: String, major: String }});
 // Define our model
