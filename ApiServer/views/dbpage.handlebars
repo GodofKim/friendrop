@@ -1,21 +1,23 @@
-<div class="jumbotron custom">
-  <form action="/admin/send" method="post">
-    <fieldset class="form-group">
-      <label>누구를 대상으로?(email) </label>
-      <input class="form-control" name="email" />
-      {{message}}
-    </fieldset>
-    <fieldset class="form-group">
-      <label>드랍할 데이터 (json) </label>
-      <input class="form-control" name="data" />
-    </fieldset>
-    <button type="submit" name="submit" class="btn btn-primary">드랍!</button>
-  </form>
-  <p>데이터 참고</p>
-  <textarea rows='4' cols='40'>{ "name":  "원빈",
-    "email": "wonbin@gmail.com",
-    "detail": { "school": "원빈대", "major": "원빈학과"}
-  }</textarea>
-  <p>생각해보니까 내 데이터에는 사용자의 이메일만 저장하고, 만약에 사용자가 존재한다면 그 사람의 프로필을
-     가져오는 식으로 해야겠다. </p>
+<div class="container">
+  <div class="jumbotron custom">
+    <form action="/admin/send" method="post">
+      <fieldset class="form-group">
+        <label>누구를 대상으로?(email) </label>
+        <input class="form-control" name="email" />
+        {{message}}
+      </fieldset>
+      <fieldset class="form-group">
+        <label>드랍할 데이터 (json) </label>
+        <input class="form-control" name="data" />
+      </fieldset>
+      <button type="submit" name="submit" class="btn btn-primary">드랍!</button>
+    </form>
+    <p>데이터 참고</p>
+    <textarea rows='4' cols='40'>{ "name":  "원빈",
+      "email": "wonbin@gmail.com",
+      "detail": { "school": "원빈대", "major": "원빈학과"}
+    }</textarea>
+    <p>생각해보니까 내 데이터에는 사용자의 이메일만 저장하고, 만약에 사용자가 존재한다면 그 사람의 프로필을
+       가져오는 식으로 해야겠다. </p>
+  </div>
 </div>
