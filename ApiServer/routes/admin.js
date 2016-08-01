@@ -11,6 +11,13 @@ router.get('/db',function (req, res, next) {
   res.render('dbpage');
 });
 
+router.get('/analytics', function(req, res, next){
+  res.render('analytics');
+});
+
+router.get('/etc', function(req, res, next){
+  res.render('etc');
+});
 
 router.post('/send',function (req, res, next){
   const email = req.body.email;
