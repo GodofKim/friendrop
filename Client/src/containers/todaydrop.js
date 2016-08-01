@@ -8,11 +8,15 @@ class TodayDrop extends Component {
     this.props.fetchArray();
   }
 
+  componentDidMount() {
+    setInterval(this.props.fetchArray, 2000);
+  }
+
   renderSlots() {
     if(this.props.drops){
       return this.props.drops.map((slot) => {
         return (
-          <li className="list-group-item" key={slot.name}>
+          <li className="list-group-item" key={slot._id}>
             <h3>{slot.name}</h3>
             <p>{slot.email}</p>
             <p>학교: {slot.detail.school} 학과: {slot.detail.major}</p>
