@@ -1,6 +1,13 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
-import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, FETCH_MESSAGE, FETCH_ARRAY} from './type';
+import {
+  AUTH_USER,
+  UNAUTH_USER,
+  AUTH_ERROR,
+  FETCH_MESSAGE,
+  FETCH_ARRAY,
+  FETCH_DROPS
+} from './type';
 
 const ROOT_URL = 'http://localhost:3000';
 
@@ -81,14 +88,15 @@ export function fetchMessage() {
   }
 }
 
-export function fetchArray() {
+export function fetchDrops() {
   return function (dispatch){
-    axios.get(`${ROOT_URL}/array`, {
+    axios.get(`${ROOT_URL}/drops`, {
       headers: { authorization: localStorage.getItem('token')}
     })
     .then(response => {
+      console.log (response);
       dispatch({
-        type: FETCH_ARRAY,
+        type: FETCH_DROPS,
         payload: response.data.drops
       });
     })
@@ -97,6 +105,21 @@ export function fetchArray() {
     });
   }
 }
+
+/*
+export function fetchDrops() {
+  const request = axios.get(`${ROOT_URL}/drops`, {
+    headers: { authorization: localStorage.getItem('token')}
+  });
+
+  console.log(request);
+
+  return {
+    type: FETCH_DROPS,
+    payload: request
+  };
+} 이건 왠지 안 되네. 역시 promise를 리턴하기 때문에 뭔가를 더 해줘야하나.
+*/
 
 /*
 export function fetchArray() {

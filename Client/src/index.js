@@ -15,7 +15,7 @@ import RequireAuth from './components/auth/require_auth';
 import Profile from './containers/profile';
 import TodayDrop from './containers/todaydrop';
 import Letter from './containers/letter';
-import Contact from './components/contact';
+import Contact from './containers/contact';
 
 import reducers from './reducers';
 import { AUTH_USER } from './actions/type';

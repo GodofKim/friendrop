@@ -9,6 +9,8 @@ const requireSignin = passport.authenticate('local', {session:false});
 
 const User = require('../models/user');
 const Drop = require('../models/drop');
+const Profile = require('../models/profile');
+
 
 router.post('/signup', Authentication.signup);
 // requireSignin이 req를 먼저 낚아채도록 이렇게 해준다??? 먼소리고
@@ -38,15 +40,124 @@ router.get('/array', requireAuth, (req, res, next)=>{
   // 아니다 아니야!!! 클라이언트가 몇초에 한번씩 계속 요청을 하도록 만드는 게 낫지 않을까. 이건 '웹사이트'가 아니라
   // '애플리케이션'이라고. => 그렇게 만들었다. 하하.
 });
+router.post('/send-drop', requireAuth, (req, res, next)=>{
+//Date.now() 사용하세요.
+});
 
 router.get('/drops', requireAuth, (req, res, next) => {
   Drop.find({host: req.user._id}, (err, drops) => {
     if(err) throw err;
 
-    const temp = JSON.parse(JSON.stringify(drops));
+    var fetchData = JSON.parse(JSON.stringify(drops));
+    var sendArray = [];
+    var times = fetchData.length;
+    var i = 0;
 
-    res.json({drops: temp});
-  })
+    fetchData.forEach((drop) => {
+      Profile.findOne({email: drop.email}, (err, profile) => {
+        var fetchProfile = JSON.parse(JSON.stringify(profile));
+        var sendData = {
+          _id: fetchProfile._id,
+          name: fetchProfile.name,
+          nickname: fetchProfile.nickname,
+          gender: fetchProfile.gender,
+          school: fetchProfile.school,
+          major: fetchProfile.major
+        };
+        sendArray[i] = sendData;
+        i ++;
+        if( i == times ){
+          res.json({drops: sendArray});
+        }
+      });
+    });
+  });
 });
 
 module.exports = router;
+
+Array.prototype.mapAndSend = function(callback, sender, thisArg) {
+
+   var T, A, k;
+
+   if (this == null) {
+     throw new TypeError(' this is null or not defined');
+   }
+
+   // 1. Let O be the result of calling ToObject passing the |this|
+   //    value as the argument.
+   var O = Object(this);
+
+   // 2. Let lenValue be the result of calling the Get internal
+   //    method of O with the argument "length".
+   // 3. Let len be ToUint32(lenValue).
+   var len = O.length >>> 0;
+
+   // 4. If IsCallable(callback) is false, throw a TypeError exception.
+   // See: http://es5.github.com/#x9.11
+   if (typeof callback !== 'function') {
+     throw new TypeError(callback + ' is not a function');
+   }
+
+   // 5. If thisArg was supplied, let T be thisArg; else let T be undefined.
+   if (arguments.length > 1) {
+     T = thisArg;
+   }
+
+   // 6. Let A be a new array created as if by the expression new Array(len)
+   //    where Array is the standard built-in constructor with that name and
+   //    len is the value of len.
+   A = new Array(len);
+
+   // 7. Let k be 0
+   k = 0;
+
+   // 8. Repeat, while k < len
+   while (k < len) {
+
+     var kValue, mappedValue;
+
+     // a. Let Pk be ToString(k).
+     //   This is implicit for LHS operands of the in operator
+     // b. Let kPresent be the result of calling the HasProperty internal
+     //    method of O with argument Pk.
+     //   This step can be combined with c
+     // c. If kPresent is true, then
+     if (k in O) {
+
+       // i. Let kValue be the result of calling the Get internal
+       //    method of O with argument Pk.
+       kValue = O[k];
+
+       // ii. Let mappedValue be the result of calling the Call internal
+       //     method of callback with T as the this value and argument
+       //     list containing kValue, k, and O.
+       mappedValue = callback.call(T, kValue, k, O);
+
+       // iii. Call the DefineOwnProperty internal method of A with arguments
+       // Pk, Property Descriptor
+       // { Value: mappedValue,
+       //   Writable: true,
+       //   Enumerable: true,
+       //   Configurable: true },
+       // and false.
+
+       // In browsers that support Object.defineProperty, use the following:
+       // Object.defineProperty(A, k, {
+       //   value: mappedValue,
+       //   writable: true,
+       //   enumerable: true,
+       //   configurable: true
+       // });
+
+       // For best browser support, use the following:
+       A[k] = mappedValue;
+     }
+     // d. Increase k by 1.
+     k++;
+   }
+   console.log(A);
+   // 9. return A
+   //return A;
+   sender(A);
+ };

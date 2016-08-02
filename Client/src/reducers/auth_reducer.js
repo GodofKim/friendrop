@@ -3,7 +3,9 @@ import {
   UNAUTH_USER ,
   AUTH_ERROR,
   FETCH_MESSAGE,
-  FETCH_ARRAY } from  '../actions/type';
+  FETCH_ARRAY,
+  FETCH_DROPS
+} from  '../actions/type';
 
 export default function(state = {}, action){
   switch(action.type) {
@@ -18,6 +20,8 @@ export default function(state = {}, action){
       return { ...state, message: action.payload};
     case FETCH_ARRAY:
       return { ...state, array: action.payload};
+    case FETCH_DROPS:
+      return { ...state, drops: action.payload};
   }
 
   return state;
