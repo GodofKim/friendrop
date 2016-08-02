@@ -6,3 +6,4 @@ export const FETCH_ARRAY = 'fetch_array';
 export const FETCH_DROPS = 'fetch_drops';
 export const FETCH_PROFILE = 'fetch_profile';
 export const FETCH_LETTERS = 'fetch_letters';
+export const FETCH_CONTACTS = 'fetch_contacts';

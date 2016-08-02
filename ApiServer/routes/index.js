@@ -112,6 +112,37 @@ router.get('/letters', requireAuth, (req, res, next) => {
     });
   });
 });
+
+router.get('/contacts', requireAuth, (req, res, next) => {
+  Letter.find({host: req.user._id}, (err, contacts) => {
+    if(err) throw err;
+
+    var fetchData = JSON.parse(JSON.stringify(contacts));
+    var sendArray = [];
+    var times = fetchData.length;
+    var i = 0;
+
+    fetchData.forEach((contact) => {
+      Profile.findOne({email: contact.email}, (err, profile) => {
+        var fetchProfile = JSON.parse(JSON.stringify(profile));
+
+        sendArray[i] = {
+          _id: fetchProfile._id, // for iterate key.
+          name: fetchProfile.name,
+          nickname: fetchProfile.nickname,
+          phone: fetchProfile.phone
+        };
+
+        i ++;
+        if( i == times ){
+          res.json({contacts: sendArray});
+        }
+      });
+    });
+  });
+});
+
+
 module.exports = router;
 
 /*

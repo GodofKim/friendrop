@@ -19,6 +19,7 @@ const profileSchema = new Schema({
   name: String,
   nickname: String,
   gender: String,
+  phone: String,
   school: String,
   major: String,
   interests: [String],

@@ -8,7 +8,8 @@ import {
   FETCH_ARRAY,
   FETCH_DROPS,
   FETCH_PROFILE,
-  FETCH_LETTERS
+  FETCH_LETTERS,
+  FETCH_CONTACTS
 } from './type';
 
 const ROOT_URL = 'http://localhost:3000';
@@ -144,6 +145,26 @@ export function fetchLetters() {
       });
   }
 }
+
+export function fetchContacts() {
+  return function (dispatch){
+    axios.get(`${ROOT_URL}/contacts`, {
+        headers: { authorization: localStorage.getItem('token')}
+      })
+      .then(response => {
+        console.log (response);
+        dispatch({
+          type: FETCH_CONTACTS,
+          payload: response.data.contacts
+        });
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
+  }
+}
+
+
 /*
 export function fetchDrops() {
   const request = axios.get(`${ROOT_URL}/drops`, {

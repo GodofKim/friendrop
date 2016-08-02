@@ -5,20 +5,37 @@ import * as actions from '../actions';
 
 class Contact extends Component {
   componentWillMount() {
-    this.props.fetchMessage();
+    this.props.fetchContacts();
   }
+
+  renderSlots() {
+    if(this.props.contacts){
+      return this.props.contacts.map((contact) => {
+        return (
+          <li className="list-group-item" key={contact._id}>
+            <h3>{contact.nickname}</h3>
+            <h5>{contact.name}</h5>
+            <p>{contact.phone}</p>
+          </li>
+        );
+      });
+    }
+  }
+
   render(){
     return (
       <div>
         <h1>연락처</h1>
-        <div>연락처 슬롯 쫙.{this.props.message}</div>
+        <ul className="list-group">
+          {this.renderSlots()}
+        </ul>
       </div>
     );
   }
 }
 
 function mapStateToProps (state){
-  return { message: state.auth.message};
+  return { contacts: state.auth.contacts};
 }
 
 //이거 끝에를 꼭 바꿔줘야 함.

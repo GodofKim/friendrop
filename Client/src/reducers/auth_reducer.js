@@ -6,7 +6,8 @@ import {
   FETCH_ARRAY,
   FETCH_DROPS,
   FETCH_PROFILE,
-  FETCH_LETTERS
+  FETCH_LETTERS,
+  FETCH_CONTACTS
 } from  '../actions/type';
 
 export default function(state = {}, action){
@@ -28,6 +29,8 @@ export default function(state = {}, action){
       return { ...state, profile: action.payload};
     case FETCH_LETTERS:
       return { ...state, letters: action.payload};
+    case FETCH_CONTACTS:
+      return { ...state, contacts: action.payload};
   }
 
   return state;
