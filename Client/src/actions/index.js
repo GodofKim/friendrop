@@ -6,7 +6,8 @@ import {
   AUTH_ERROR,
   FETCH_MESSAGE,
   FETCH_ARRAY,
-  FETCH_DROPS
+  FETCH_DROPS,
+  FETCH_PROFILE
 } from './type';
 
 const ROOT_URL = 'http://localhost:3000';
@@ -85,6 +86,25 @@ export function fetchMessage() {
     .catch(error => {
       console.log(error.response);
     });
+  }
+}
+
+export function fetchProfile() {
+  //나중엔 :id 까지 추가하자고
+  return function (dispatch){
+    axios.get(`${ROOT_URL}/profile`, {
+        headers: { authorization: localStorage.getItem('token')}
+      })
+      .then(response => {
+        console.log ("빼애액",response);
+        dispatch({
+          type: FETCH_PROFILE,
+          payload: response.data.profile
+        });
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
   }
 }
 

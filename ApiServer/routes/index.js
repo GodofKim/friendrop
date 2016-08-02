@@ -44,6 +44,15 @@ router.post('/send-drop', requireAuth, (req, res, next)=>{
 //Date.now() 사용하세요.
 });
 
+router.get('/profile', requireAuth, (req, res, next) => {
+    Profile.findOne({host: req.user._id}, (err, profile) => {
+        //나중에 프로필에서 지울 목록은 다 지우고 보내줘라. 자기꺼면 아니고
+        var temp = JSON.parse(JSON.stringify(profile));
+        res.json({profile: temp});
+    });
+});
+
+
 router.get('/drops', requireAuth, (req, res, next) => {
   Drop.find({host: req.user._id}, (err, drops) => {
     if(err) throw err;
@@ -56,7 +65,8 @@ router.get('/drops', requireAuth, (req, res, next) => {
     fetchData.forEach((drop) => {
       Profile.findOne({email: drop.email}, (err, profile) => {
         var fetchProfile = JSON.parse(JSON.stringify(profile));
-        var sendData = {
+
+        sendArray[i] = {
           _id: fetchProfile._id,
           name: fetchProfile.name,
           nickname: fetchProfile.nickname,
@@ -64,7 +74,7 @@ router.get('/drops', requireAuth, (req, res, next) => {
           school: fetchProfile.school,
           major: fetchProfile.major
         };
-        sendArray[i] = sendData;
+
         i ++;
         if( i == times ){
           res.json({drops: sendArray});

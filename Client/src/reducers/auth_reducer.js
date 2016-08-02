@@ -4,7 +4,8 @@ import {
   AUTH_ERROR,
   FETCH_MESSAGE,
   FETCH_ARRAY,
-  FETCH_DROPS
+  FETCH_DROPS,
+  FETCH_PROFILE
 } from  '../actions/type';
 
 export default function(state = {}, action){
@@ -22,6 +23,8 @@ export default function(state = {}, action){
       return { ...state, array: action.payload};
     case FETCH_DROPS:
       return { ...state, drops: action.payload};
+    case FETCH_PROFILE:
+      return { ...state, profile: action.payload};
   }
 
   return state;
