@@ -14,9 +14,9 @@ class Profile extends Component {
       var profile = this.props.profile;
       return (
         <div>
-          <p>{profile.name}</p>
-          <p>{profile.nickname}</p>
-          <p>{profile.school} {profile.major}</p>
+          <h3>{profile.name}</h3>
+          <h4>{profile.nickname}</h4>
+          <h5>{profile.school} {profile.major}</h5>
     
         </div>
       );

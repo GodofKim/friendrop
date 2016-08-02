@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="43cac62e-7345-49b6-a69f-ba2a599c83d8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ApiServer/models/profile.js" afterPath="$PROJECT_DIR$/ApiServer/models/profile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ApiServer/routes/index.js" afterPath="$PROJECT_DIR$/ApiServer/routes/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Client/index.html" afterPath="$PROJECT_DIR$/Client/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Client/src/actions/index.js" afterPath="$PROJECT_DIR$/Client/src/actions/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Client/src/actions/type.js" afterPath="$PROJECT_DIR$/Client/src/actions/type.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Client/src/containers/contact.js" afterPath="$PROJECT_DIR$/Client/src/containers/contact.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Client/src/containers/letter.js" afterPath="$PROJECT_DIR$/Client/src/containers/letter.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Client/src/reducers/auth_reducer.js" afterPath="$PROJECT_DIR$/Client/src/reducers/auth_reducer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Client/src/containers/profile.js" afterPath="$PROJECT_DIR$/Client/src/containers/profile.js" />
     </list>
     <ignored path="friendrop.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -70,22 +63,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Client/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
+            <state relative-caret-position="330">
+              <caret line="15" column="33" selection-start-line="15" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="admin.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ApiServer/routes/admin.js">
+      <file leaf-file-name="profile.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Client/src/containers/profile.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="121">
-              <caret line="38" column="15" selection-start-line="38" selection-start-column="15" selection-end-line="38" selection-end-column="15" />
-              <folding />
+            <state relative-caret-position="550">
+              <caret line="25" column="12" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -146,7 +141,6 @@
       <list>
         <option value="$PROJECT_DIR$/Client/src/components/auth/login.js" />
         <option value="$PROJECT_DIR$/ApiServer/app.js" />
-        <option value="$PROJECT_DIR$/Client/src/containers/profile.js" />
         <option value="$PROJECT_DIR$/Client/src/containers/todaydrop.js" />
         <option value="$PROJECT_DIR$/ApiServer/models/profile.js" />
         <option value="$PROJECT_DIR$/Client/src/actions/type.js" />
@@ -156,6 +150,7 @@
         <option value="$PROJECT_DIR$/Client/src/containers/contact.js" />
         <option value="$PROJECT_DIR$/ApiServer/routes/index.js" />
         <option value="$PROJECT_DIR$/Client/index.html" />
+        <option value="$PROJECT_DIR$/Client/src/containers/profile.js" />
       </list>
     </option>
   </component>
@@ -538,12 +533,12 @@
       <updated>1469944265558</updated>
       <workItem from="1469944267187" duration="1237000" />
       <workItem from="1470067177861" duration="185000" />
-      <workItem from="1470158287286" duration="4409000" />
+      <workItem from="1470158287286" duration="4566000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7336000" />
+    <option name="totallyTimeSpent" value="7493000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="74" y="69" width="1313" height="734" extended-state="0" />
@@ -900,16 +895,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Client/src/containers/profile.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="8" column="3" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Client/src/reducers/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1010,9 +995,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Client/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
+        <state relative-caret-position="330">
+          <caret line="15" column="33" selection-start-line="15" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/src/containers/profile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="25" column="12" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
