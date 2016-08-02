@@ -10,7 +10,7 @@ const requireSignin = passport.authenticate('local', {session:false});
 const User = require('../models/user');
 const Drop = require('../models/drop');
 const Profile = require('../models/profile');
-
+const Letter = require('../models/letter');
 
 router.post('/signup', Authentication.signup);
 // requireSignin이 req를 먼저 낚아채도록 이렇게 해준다??? 먼소리고
@@ -84,8 +84,37 @@ router.get('/drops', requireAuth, (req, res, next) => {
   });
 });
 
+router.get('/letters', requireAuth, (req, res, next) => {
+  Letter.find({host: req.user._id}, (err, letters) => {
+    if(err) throw err;
+
+    var fetchData = JSON.parse(JSON.stringify(letters));
+    var sendArray = [];
+    var times = fetchData.length;
+    var i = 0;
+
+    fetchData.forEach((letter) => {
+      Profile.findOne({email: letter.email}, (err, profile) => {
+        var fetchProfile = JSON.parse(JSON.stringify(profile));
+
+        sendArray[i] = {
+          _id: fetchProfile._id, // for iterate key.
+          name: fetchProfile.name,
+          nickname: fetchProfile.nickname,
+          content: letter.content
+        };
+
+        i ++;
+        if( i == times ){
+          res.json({letters: sendArray});
+        }
+      });
+    });
+  });
+});
 module.exports = router;
 
+/*
 Array.prototype.mapAndSend = function(callback, sender, thisArg) {
 
    var T, A, k;
@@ -171,3 +200,4 @@ Array.prototype.mapAndSend = function(callback, sender, thisArg) {
    //return A;
    sender(A);
  };
+*/

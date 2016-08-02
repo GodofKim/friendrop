@@ -7,7 +7,8 @@ import {
   FETCH_MESSAGE,
   FETCH_ARRAY,
   FETCH_DROPS,
-  FETCH_PROFILE
+  FETCH_PROFILE,
+  FETCH_LETTERS
 } from './type';
 
 const ROOT_URL = 'http://localhost:3000';
@@ -126,6 +127,23 @@ export function fetchDrops() {
   }
 }
 
+export function fetchLetters() {
+  return function (dispatch){
+    axios.get(`${ROOT_URL}/letters`, {
+        headers: { authorization: localStorage.getItem('token')}
+      })
+      .then(response => {
+        console.log (response);
+        dispatch({
+          type: FETCH_LETTERS,
+          payload: response.data.letters
+        });
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
+  }
+}
 /*
 export function fetchDrops() {
   const request = axios.get(`${ROOT_URL}/drops`, {
