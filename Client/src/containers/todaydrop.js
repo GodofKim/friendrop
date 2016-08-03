@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-
+import TodayDropSlot from '../components/todaydropSlot';
 
 class TodayDrop extends Component {
   componentWillMount() {
@@ -9,19 +9,15 @@ class TodayDrop extends Component {
   }
 
   componentDidMount() {
-  //  setInterval(this.props.fetchDrops, 2000);
+    setInterval(this.props.fetchDrops, 2000);
   }
 
   renderSlots() {
     if(this.props.drops){
       return this.props.drops.map((drop) => {
         return (
-          <li className="list-group-item" key={drop._id}>
-            <h3>{drop.nickname}</h3>
-            <p>{drop.name}</p>
-            <p>{drop.gender}</p>
-            <p>{drop.school} {drop.major}</p>
-          </li>
+          <TodayDropSlot drop={drop} key={drop._id}/>
+
         );
       });
     }
