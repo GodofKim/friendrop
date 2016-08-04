@@ -2,12 +2,16 @@ import React, { Component } from 'react';
 
 class TodayDropSlot extends Component {
   render() {
+    var drop = this.props.drop;
+
     return(
       <li className="list-group-item">
-        <h3>{this.props.drop.nickname}</h3>
-        <p>{this.props.drop.name}</p>
-        <p>{this.props.drop.gender}</p>
-        <p>{this.props.drop.school} {this.props.drop.major}</p>
+        <h3>{drop.nickname}</h3>
+        <p>{drop.name}</p>
+        <p>{drop.gender}</p>
+        <p>{drop.school} {drop.major}</p>
+        <p>{new Date(drop.date).getFullYear()}-{new Date(drop.date).getMonth()}
+          -{new Date(drop.date).getDate()}</p>
       </li>
     );
   }
