@@ -1,18 +1,18 @@
 <div class="container">
   <div class="jumbotron custom">
-    <form action="/admin/send" method="post">
+    <form action="/admin/send-drop" method="post">
       <fieldset class="form-group">
         <label>누구를 대상으로?(email) </label>
         <input class="form-control" name="email" />
         {{message}}
       </fieldset>
       <fieldset class="form-group">
-        <label>드랍할 데이터 (json) </label>
-        <input class="form-control" name="data" />
+        <label>누구의 프로필을 보내는가? (email)</label>
+        <input class="form-control" name="senderEmail" />
       </fieldset>
       <button type="submit" name="submit" class="btn btn-primary">드랍!</button>
     </form>
-    <p>데이터 참고</p>
+    <p>데이터 참고 (구식 신경쓰지 마셈)</p>
     <textarea rows='4' cols='40'>{ "name":  "원빈",
       "email": "wonbin@gmail.com",
       "detail": { "school": "원빈대", "major": "원빈학과"}

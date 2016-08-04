@@ -40,10 +40,10 @@ router.get('/array', requireAuth, (req, res, next)=>{
   // 아니다 아니야!!! 클라이언트가 몇초에 한번씩 계속 요청을 하도록 만드는 게 낫지 않을까. 이건 '웹사이트'가 아니라
   // '애플리케이션'이라고. => 그렇게 만들었다. 하하.
 });
-router.post('/send-drop', requireAuth, (req, res, next)=>{
-//Date.now() 사용하세요.
-});
 
+
+
+// Send Profile
 router.get('/profile', requireAuth, (req, res, next) => {
     Profile.findOne({host: req.user._id}, (err, profile) => {
         //나중에 프로필에서 지울 목록은 다 지우고 보내줘라. 자기꺼면 아니고
@@ -52,7 +52,7 @@ router.get('/profile', requireAuth, (req, res, next) => {
     });
 });
 
-
+// Send Drops
 router.get('/drops', requireAuth, (req, res, next) => {
   Drop.find({host: req.user._id}, (err, drops) => {
     if(err) throw err;
@@ -72,7 +72,8 @@ router.get('/drops', requireAuth, (req, res, next) => {
           nickname: fetchProfile.nickname,
           gender: fetchProfile.gender,
           school: fetchProfile.school,
-          major: fetchProfile.major
+          major: fetchProfile.major,
+          date: drop.date
         };
 
         i ++;
@@ -84,6 +85,7 @@ router.get('/drops', requireAuth, (req, res, next) => {
   });
 });
 
+//Send Letters
 router.get('/letters', requireAuth, (req, res, next) => {
   Letter.find({host: req.user._id}, (err, letters) => {
     if(err) throw err;
@@ -101,7 +103,8 @@ router.get('/letters', requireAuth, (req, res, next) => {
           _id: fetchProfile._id, // for iterate key.
           name: fetchProfile.name,
           nickname: fetchProfile.nickname,
-          content: letter.content
+          content: letter.content,
+          date: letter.date
         };
 
         i ++;
@@ -113,6 +116,7 @@ router.get('/letters', requireAuth, (req, res, next) => {
   });
 });
 
+// Send Contacts
 router.get('/contacts', requireAuth, (req, res, next) => {
   Letter.find({host: req.user._id}, (err, contacts) => {
     if(err) throw err;
@@ -130,7 +134,8 @@ router.get('/contacts', requireAuth, (req, res, next) => {
           _id: fetchProfile._id, // for iterate key.
           name: fetchProfile.name,
           nickname: fetchProfile.nickname,
-          phone: fetchProfile.phone
+          phone: fetchProfile.phone,
+          date: contact.date
         };
 
         i ++;
