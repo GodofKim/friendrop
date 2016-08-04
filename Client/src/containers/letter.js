@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-
+import LetterSlot from '../components/letterSlot';
 
 class Letter extends Component {
   componentWillMount() {
@@ -10,13 +10,15 @@ class Letter extends Component {
 
   renderSlots() {
     if(this.props.letters){
+      this.props.letters.sort(function(a,b){
+        // Turn your strings into dates, and then subtract them
+        // to get a value that is either negative, positive, or zero.
+        return new Date(b.date) - new Date(a.date);
+      });
+
       return this.props.letters.map((letter) => {
         return (
-          <li className="list-group-item" key={letter._id}>
-            <h3>{letter.nickname}</h3>
-            <h5>{letter.name}</h5>
-            <p>{letter.content}</p>
-          </li>
+          <LetterSlot letter={letter} key={letter._id}/>
         );
       });
     }
