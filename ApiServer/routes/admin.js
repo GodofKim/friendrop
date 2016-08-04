@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 const User = require('../models/user');
 const Drop = require('../models/drop');
+const Letter = require('../models/letter');
+const Contact = require('../models/contact');
+
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -20,15 +23,61 @@ router.get('/etc', function(req, res, next){
   res.render('etc');
 });
 
-router.post('/send-drop',function (req, res, next){
-  console.log(req.body);
+router.post ('/send-letter', function (req, res, next) {
   const receiver = req.body.email;
-  const senderEmail = req.body.senderEmail;
+
+  User.findOne( {email: receiver}, function(err, user){
+    if(err) {
+      res.redirect('/admin/db', {message: 'no one matches.'});
+      throw err;
+    }
+
+    const letter = new Letter({
+      host: user._id,
+      email: req.body.senderEmail,
+      content: req.body.content,
+      date: Date.now()
+    });
+
+    letter.save(function(err){
+      if (err) { return next(err);}
+
+      res.redirect('/admin/db');
+    });
+  });
+
+});
+
+router.post ('/send-contact', function(req, res, next) {
+  const receiver = req.body.email;
+
+  User.findOne( {email: receiver}, function(err, user){
+    if(err) {
+      res.redirect('/admin/db', {message: 'no one matches.'});
+      throw err;
+    }
+
+    const contact = new Contact({
+      host: user._id,
+      email: req.body.senderEmail,
+      date: Date.now()
+    });
+
+    contact.save(function(err){
+      if (err) { return next(err);}
+
+      res.redirect('/admin/db');
+    });
+  });
+});
+
+router.post('/send-drop',function (req, res, next){
+  const receiver = req.body.email;
 
   const data = {};
   data.date = Date.now(); // new Date.now() 가 아니라 그냥 Date.now(). 생각해보니 그러네 클래스의 메소드지 인스턴스의 메소드가 아니잖아
   data.host = receiver;
-  data.email = senderEmail;
+  data.email = req.body.senderEmail;
 
 
 
@@ -49,31 +98,9 @@ router.post('/send-drop',function (req, res, next){
 
       res.redirect('/admin/db');
     });
-/*
-    User.findByIdAndUpdate(
-          user._id,
-          {$push: {"drops": data}},
-          {safe: true, upsert: true, new : true}, //new는 없으면 배열 새로 만들라는 거.
-          function(err, model) {
-              console.log(err);
 
-              res.redirect('/admin');
-          }
-      );
-*/
   });
 });
 
-/*
-router.post('/send', function (req, res, next){
-  const email = res.body.email;
-  const data = JSON.parse(req.body.data);
-
-  User.findOne({email: email}, function(err, user){
-    if(err) throw err;
-
-    user.update({$push: { }})
-  })
-})*/
 
 module.exports = router;
