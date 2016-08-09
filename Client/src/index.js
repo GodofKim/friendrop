@@ -34,7 +34,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
-        <IndexRoute component={Welcome}/>
+        <IndexRoute component={Login}/>
         <Route path="login" component={Login}/>
         <Route path="logout" component={Logout}/>
         <Route path="signup" component={Signup}/>

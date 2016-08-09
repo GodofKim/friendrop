@@ -27,7 +27,7 @@ export function loginUser({ email, password}) {
         localStorage.setItem('token', response.data.token);//localStorage는 window객체에 있으므로 임포트 안 해도 됨.
 
         // - redirect to the route '/feature'
-        browserHistory.push('/feature');
+        browserHistory.push('/todaydrop');
       })
       .catch(() =>{
         // Case 2: If request is bad... 아이디/패스워드를 틀리거나 할때.

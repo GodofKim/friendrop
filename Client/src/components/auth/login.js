@@ -23,20 +23,24 @@ class Login extends Component {
     const { handleSubmit, fields: {email, password}} = this.props;
 
     return (
-      <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-        <fieldset className="form-group">
-          <label>Email:</label>
-          <input {...email}  className="form-control" />
-        </fieldset>
-        <fieldset className="form-group">
-          <label>Password:</label>
-          <input {...password}
-          type="password"
-          className="form-control" />
-        </fieldset>
-        {this.renderAlert()}
-        <button action="submit" className="btn btn-primary">Log in</button>
-      </form>
+      <div>
+        <h1>Friendrop</h1>
+        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+          <fieldset className="form-group">
+            <label>Email:</label>
+            <input {...email}  className="form-control" />
+          </fieldset>
+          <fieldset className="form-group">
+            <label>Password:</label>
+            <input {...password}
+            type="password"
+            className="form-control" />
+          </fieldset>
+          {this.renderAlert()}
+          <button action="submit" className="btn btn-primary">Log in</button>
+        </form>
+        <img src="https://s3.ap-northeast-2.amazonaws.com/friendrop/UI/friendrop_logo.png" width="400"/>
+      </div>
     );
   }
 }
