@@ -6,6 +6,7 @@ class Signup extends Component {
 
   handleFormSubmit(formProps) {
     // Call action creator to sign up the user!
+    console.log("Signup Class : 이건 되나");
     this.props.signupUser(formProps);
   }
 

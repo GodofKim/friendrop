@@ -9,8 +9,8 @@ class ProfileEdit extends Component {
   }
 
   handleFormSubmit(formProps) {
-    // Call action creator to sign up the user!
     this.props.editProfile(formProps);
+    console.log("이건 되냐");
   }
 
   renderAlert(){
@@ -24,14 +24,15 @@ class ProfileEdit extends Component {
     }
   }
 
-  renderProfileEdit() {
-    //if () 해서 내용물이 있는지 없는지 꼭!! 반드시!! 확인해야한다 에러나지 않도록
+
+  render(){
     if(this.props.profile) {
       var profile = this.props.profile;
       const { handleSubmit } = this.props;
 
       return (
         <div>
+          <h1>Profile edit</h1>
           <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
             <fieldset className="form-group">
               <label>Name </label>
@@ -55,15 +56,11 @@ class ProfileEdit extends Component {
           </form>
         </div>
       );
+    } else{
+      return (
+        <div>Loading...</div>
+      );
     }
-  }
-  render(){
-    return (
-      <div>
-        <h1>Profile</h1>
-        {this.renderProfileEdit()}
-      </div>
-    );
   }
 }
 
@@ -91,7 +88,7 @@ function validate(formProps) {
 }
 
 function mapStateToProps (state){
-  return { profile: state.auth.profile};
+  return { profile: state.auth.profile, errorMessage: state.auth.error};
 }
 
 export default reduxForm({

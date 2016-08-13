@@ -52,6 +52,26 @@ router.get('/profile', requireAuth, (req, res, next) => {
     });
 });
 
+router.post('/profile', requireAuth, (req, res, next)=> {
+  console.log("sdfssfdf");
+  Profile.update({host: req.user._id},
+    {
+      $set: {
+        "name": req.body.name,
+        "nickname": req.body.nickname,
+        "school": req.body.school,
+        "major": req.body.major
+      }
+    }, (err) => {
+      if(err) {
+        res.status(422).send("err~~");
+      }
+      console.log("sfs");
+      res.status(200);
+    });
+});
+
+
 // Send Drops
 router.get('/drops', requireAuth, (req, res, next) => {
   Drop.find({host: req.user._id}, (err, drops) => {

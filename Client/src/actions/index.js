@@ -168,18 +168,20 @@ export function fetchContacts() {
 export function editProfile({ name, nickname, school, major}){
   return function(dispatch){
     //axios 최신 버전부터 바뀜.
+    console.log("action work?");
     axios({
-      url: `${ROOT_URL}/profile-edit`,
+      url: `${ROOT_URL}/profile`,
       data: {name, nickname, school, major},
       method: 'post',
       responseType: 'json'
     })
       .then(response => {
-        dispatch({type:AUTH_USER});
-        localStorage.setItem('token', response.data.token);
-        browserHistory.push('/feature');
+        console.log("울랄라");
+        dispatch({type: FETCH_PROFILE});
+        browserHistory.push('/profile');
       })
       .catch(error => {
+        console.log("제우스");
         dispatch(authError(error.response.data.error));
       });
   };
