@@ -3,6 +3,7 @@ import { reduxForm } from 'redux-form';
 import * as actions from '../../actions';
 
 class Signup extends Component {
+
   handleFormSubmit(formProps) {
     // Call action creator to sign up the user!
     this.props.signupUser(formProps);
@@ -39,6 +40,7 @@ class Signup extends Component {
           <input type="password"  className="form-control" {...passwordConfirm} />
           {passwordConfirm.touched && passwordConfirm.error && <div className="error">{passwordConfirm.error}</div>}
         </fieldset>
+        
         {this.renderAlert()}
         <button action="submit" className="btn btn-primary">Sign up!</button>
       </form>
@@ -50,6 +52,7 @@ class Signup extends Component {
 function validate(formProps) {
   const errors = {};
 
+  //formProps => 말그대로 form 에있는 props인듯 {...email} 이런거
   if (!formProps.email){
     errors.email = 'Please enter an email';
   }

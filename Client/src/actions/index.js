@@ -9,7 +9,8 @@ import {
   FETCH_DROPS,
   FETCH_PROFILE,
   FETCH_LETTERS,
-  FETCH_CONTACTS
+  FETCH_CONTACTS,
+  EDIT_PROFILE
 } from './type';
 
 const ROOT_URL = 'http://localhost:3000';
@@ -164,7 +165,25 @@ export function fetchContacts() {
   }
 }
 
-
+export function editProfile({ name, nickname, school, major}){
+  return function(dispatch){
+    //axios 최신 버전부터 바뀜.
+    axios({
+      url: `${ROOT_URL}/profile-edit`,
+      data: {name, nickname, school, major},
+      method: 'post',
+      responseType: 'json'
+    })
+      .then(response => {
+        dispatch({type:AUTH_USER});
+        localStorage.setItem('token', response.data.token);
+        browserHistory.push('/feature');
+      })
+      .catch(error => {
+        dispatch(authError(error.response.data.error));
+      });
+  };
+}
 /*
 export function fetchDrops() {
   const request = axios.get(`${ROOT_URL}/drops`, {
