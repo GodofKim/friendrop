@@ -4,14 +4,17 @@ import * as actions from '../actions';
 
 
 class ProfileEdit extends Component {
+
   componentWillMount() {
-    this.props.fetchProfile();
+    if(this.props.profile){
+      var profile = this.props.profile;
+      this.props.fields.name.value = profile.name;
+    }
   }
 
   handleFormSubmit(formProps) {
     console.log("handleFormSubmit: WWWWKKWKWK");
     this.props.editProfile(formProps);
-
   }
 
   renderAlert(){
@@ -28,7 +31,7 @@ class ProfileEdit extends Component {
 
   render(){
     if(this.props.profile) {
-      var profile = this.props.profile;
+
       const { handleSubmit, fields: {name, nickname, school, major} } = this.props;
 
       return (
@@ -37,19 +40,19 @@ class ProfileEdit extends Component {
           <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
             <fieldset className="form-group">
               <label>Name </label>
-              <input className="form-control" defaultValue={profile.name} {...name}/>
+              <input className="form-control" {...name}/>
             </fieldset>
             <fieldset className="form-group">
               <label>Nickname </label>
-              <input className="form-control" defaultValue={profile.nickname} {...nickname}/>
+              <input className="form-control" {...nickname}/>
             </fieldset>
             <fieldset className="form-group">
               <label>School </label>
-              <input className="form-control" defaultValue={profile.school} {...school}/>
+              <input className="form-control" {...school}/>
             </fieldset>
             <fieldset className="form-group">
               <label>Major </label>
-              <input className="form-control" defaultValue={profile.major} {...major}/>
+              <input className="form-control" {...major}/>
             </fieldset>
 
             {this.renderAlert()}
@@ -65,8 +68,11 @@ class ProfileEdit extends Component {
   }
 }
 
+
+
 function mapStateToProps (state){
-  return { profile: state.auth.profile, errorMessage: state.auth.error};
+
+  return { profile: state.auth.profile, errorMessage: state.auth.error, initialValues: state.auth.profile};
 }
 
 export default reduxForm({
