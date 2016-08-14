@@ -52,8 +52,9 @@ router.get('/profile', requireAuth, (req, res, next) => {
     });
 });
 
+// Edit Profile
 router.post('/profile', requireAuth, (req, res, next)=> {
-  console.log("sdfssfdf");
+
   Profile.update({host: req.user._id},
     {
       $set: {
@@ -64,10 +65,11 @@ router.post('/profile', requireAuth, (req, res, next)=> {
       }
     }, (err) => {
       if(err) {
-        res.status(422).send("err~~");
+        res.status(422).send({error: 'Edit Error'});
       }
       console.log("sfs");
       res.status(200);
+      res.send();
     });
 });
 

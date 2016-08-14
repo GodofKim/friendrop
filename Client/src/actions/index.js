@@ -173,15 +173,16 @@ export function editProfile({ name, nickname, school, major}){
       url: `${ROOT_URL}/profile`,
       data: {name, nickname, school, major},
       method: 'post',
-      responseType: 'json'
+      responseType: 'json',
+      headers: { authorization: localStorage.getItem('token')}
     })
       .then(response => {
-        console.log("울랄라");
+        console.log("editProfile Action: SUCCESS");
         dispatch({type: FETCH_PROFILE});
         browserHistory.push('/profile');
       })
       .catch(error => {
-        console.log("제우스");
+        console.log("editProfile Action: FAIL");
         dispatch(authError(error.response.data.error));
       });
   };

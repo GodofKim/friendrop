@@ -9,8 +9,9 @@ class ProfileEdit extends Component {
   }
 
   handleFormSubmit(formProps) {
+    console.log("handleFormSubmit: WWWWKKWKWK");
     this.props.editProfile(formProps);
-    console.log("이건 되냐");
+
   }
 
   renderAlert(){
@@ -28,7 +29,7 @@ class ProfileEdit extends Component {
   render(){
     if(this.props.profile) {
       var profile = this.props.profile;
-      const { handleSubmit } = this.props;
+      const { handleSubmit, fields: {name, nickname, school, major} } = this.props;
 
       return (
         <div>
@@ -36,23 +37,23 @@ class ProfileEdit extends Component {
           <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
             <fieldset className="form-group">
               <label>Name </label>
-              <input className="form-control" name="name" defaultValue={profile.name}/>
+              <input className="form-control" defaultValue={profile.name} {...name}/>
             </fieldset>
             <fieldset className="form-group">
               <label>Nickname </label>
-              <input className="form-control" name="nickname" defaultValue={profile.nickname}/>
+              <input className="form-control" defaultValue={profile.nickname} {...nickname}/>
             </fieldset>
             <fieldset className="form-group">
               <label>School </label>
-              <input className="form-control" name="school" defaultValue={profile.school}/>
+              <input className="form-control" defaultValue={profile.school} {...school}/>
             </fieldset>
             <fieldset className="form-group">
               <label>Major </label>
-              <input className="form-control" name="major" defaultValue={profile.major}/>
+              <input className="form-control" defaultValue={profile.major} {...major}/>
             </fieldset>
 
             {this.renderAlert()}
-            <button action="submit" className="btn btn-primary">Apply</button>
+            <button type="submit" className="btn btn-primary">Apply</button>
           </form>
         </div>
       );
@@ -64,35 +65,11 @@ class ProfileEdit extends Component {
   }
 }
 
-function validate(formProps) {
-  const errors = {};
-
-  //formProps => 말그대로 form 에있는 props인듯 {...email} 이런거
-  if (!formProps.name){
-    errors.name = 'Please enter an email';
-  }
-
-  if (!formProps.nickname) {
-    errors.nickname = 'Please enter a password';
-  }
-
-  if (!formProps.school){
-    errors.school = 'Please enter a password confirmation';
-  }
-
-  if(formProps.major){
-    errors.major = 'Passwords must match';
-  }
-
-  return errors;
-}
-
 function mapStateToProps (state){
   return { profile: state.auth.profile, errorMessage: state.auth.error};
 }
 
 export default reduxForm({
   form: 'profile-edit',
-  fields: ['name','nickname','school','major'],
-  validate
+  fields: ['name','nickname','school','major']
 }, mapStateToProps, actions)(ProfileEdit);

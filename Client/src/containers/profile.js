@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-
+import { Link } from 'react-router';
 
 class Profile extends Component {
   componentWillMount() {
@@ -29,7 +29,9 @@ class Profile extends Component {
         <h2>먼저 이곳에 사진들을 올릴 것이고</h2>
         <div>이 아래엔 프로필 목록 쫙.</div>
         {this.renderProfile()}
+        <Link className="btn btn-primary" to="/profile-edit">Edit</Link>
       </div>
+
     );
   }
 }
