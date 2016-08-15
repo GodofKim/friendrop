@@ -75,6 +75,24 @@ export function logoutUser(){
   }
 }
 
+export function removeUser() {
+  return function (dispatch){
+    axios({
+      url: `${ROOT_URL}/user-remove`,
+      method: 'post',
+      responseType: 'json',
+      headers: { authorization: localStorage.getItem('token')}
+    })
+      .then(response => {
+        logoutUser();
+        browserHistory.push('/');
+      })
+      .catch(error => {
+        dispatch(authError(error.response.data.error));
+      });
+  }
+}
+
 export function fetchMessage() {
   return function (dispatch){
     axios.get(ROOT_URL, {

@@ -31,6 +31,7 @@ class Profile extends Component {
         <hr/>
         {this.renderProfile()}
         <Link className="btn btn-primary" to="/profile-edit">Edit</Link>
+        <Link className="btn btn-danger" to="/user-remove">계정 삭제</Link>
       </div>
 
     );

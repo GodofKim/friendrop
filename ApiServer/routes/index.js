@@ -11,6 +11,8 @@ const User = require('../models/user');
 const Drop = require('../models/drop');
 const Profile = require('../models/profile');
 const Letter = require('../models/letter');
+const Contact = require('../models/contact');
+
 
 router.post('/signup', Authentication.signup);
 // requireSignin이 req를 먼저 낚아채도록 이렇게 해준다??? 먼소리고
@@ -21,6 +23,26 @@ router.get('/', requireAuth , (req, res, next)=>{
   res.send({ message: "서버로부터 보내지는 메시지입니다."});
 });
 
+router.post('/user-remove', requireAuth, (req, res, next) => {
+
+  Letter.remove({email: req.user.email}, (err)=> {
+    if(err) throw err;
+    Contact.remove({email: req.user.email}, (err)=> {
+      if(err) throw err;
+      Drop.remove({email: req.user.email}, (err)=> {
+        if(err) throw err;
+        Profile.remove({email: req.user.email}, (err)=> {
+          if(err) throw err;
+          User.remove({_id: req.user._id}, (err)=> {
+            if(err) throw err;
+            res.status(200);
+            res.send();
+          });
+        });
+      });
+    });
+  }); // 미친 콜백 지옥. 나중에 Promise나 Generator로 바꾸자
+});
 
 //임시 응답. 객체 배열 보냄.
 router.get('/array', requireAuth, (req, res, next)=>{
@@ -38,7 +60,7 @@ router.get('/array', requireAuth, (req, res, next)=>{
   //실험 안 해도 논리적으로 그럴 것 같은데. 차라리 패스포트가 간단한 정보만 리턴하게 할까? 아니다. 근데 어차피
   // 이 페이지로 요청할 할때만 정보를 가져오니까 차라리 패스포트가 가져온 정보를 이용하는 게 낫지 않나.
   // 아니다 아니야!!! 클라이언트가 몇초에 한번씩 계속 요청을 하도록 만드는 게 낫지 않을까. 이건 '웹사이트'가 아니라
-  // '애플리케이션'이라고. => 그렇게 만들었다. 하하.
+  // '애플리케이션'이라고. => 그렇게 만들었다.
 });
 
 

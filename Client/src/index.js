@@ -17,6 +17,7 @@ import ProfileEdit from './containers/profile-edit';
 import TodayDrop from './containers/todaydrop';
 import Letter from './containers/letter';
 import Contact from './containers/contact';
+import UserRemove from './containers/user-remove';
 
 import reducers from './reducers';
 import { AUTH_USER } from './actions/type';
@@ -39,6 +40,7 @@ ReactDOM.render(
         <Route path="login" component={Login}/>
         <Route path="logout" component={Logout}/>
         <Route path="signup" component={Signup}/>
+        <Route path="user-remove" component={RequireAuth(UserRemove)}/>
 
         <Route path="feature" component={RequireAuth(Feature)}/>
         <Route path="profile" component={RequireAuth(Profile)}/>
