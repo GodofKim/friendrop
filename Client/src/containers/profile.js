@@ -16,7 +16,8 @@ class Profile extends Component {
         <div>
           <h3>{profile.name}</h3>
           <h4>{profile.nickname}</h4>
-          <h5>{profile.school} {profile.major}</h5>
+          <hr/>
+          <h5>{profile.school} - {profile.major}</h5>
     
         </div>
       );
@@ -26,8 +27,8 @@ class Profile extends Component {
     return (
       <div>
         <h1>Profile</h1>
-        <h2>먼저 이곳에 사진들을 올릴 것이고</h2>
-        <div>이 아래엔 프로필 목록 쫙.</div>
+        <img src="https://goo.gl/O6e1TB" width="300px"/>
+        <hr/>
         {this.renderProfile()}
         <Link className="btn btn-primary" to="/profile-edit">Edit</Link>
       </div>
