@@ -1,5 +1,6 @@
 const jwt = require('jwt-simple');
 const User = require('../models/user');
+const Profile = require('../models/profile');
 const config = require('../config');
 
 function tokenForUser (user) {
@@ -35,12 +36,26 @@ exports.signup = function(req, res, next){
       password: password
     });
 
-    //save 이걸 하지 않으면 db에 저장이 안 됨.
+    //save 이걸 하지 않으면 db에 저장이 안 됨. 일단 유저 도큐먼트 저장
     user.save(function(err){
       if (err) { return next(err);}
 
-      // Repond to request indicating the user was created
-      res.json({ token: tokenForUser(user)});
+      // profile 도큐먼트 생성
+      User.findOne({email: email}, (err, thisUser) => {
+        if(err) { return next(err);}
+
+        const profile = new Profile({
+          host: thisUser._id
+        });
+
+        profile.save((err) => {
+          if(err)  {return next(err);}
+
+          // Respond to request indicating the user was created
+          res.json({ token: tokenForUser(user)});
+        });
+      });
+
     });
   });
 }
