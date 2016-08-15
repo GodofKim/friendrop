@@ -11,9 +11,7 @@ const userSchema = new Schema({
   //이 사람이 가르쳐주는 게 더 많네. unique!
   //대소문자를 따로 보기 때문에 애초에 소문자로 다 변환해서 저장하는 게 좋다.
   password: String,
-  name: String,
-  detail : { school: String, major: String },
-  drops : [dropSchema]
+
 });
 
 // On Save Hook, encrypt password 세이브 할때 이것도 처리하라는 것 같군. -> pre니까 이걸 먼저.next 함수가 그럼 save하는 애인가 보네.

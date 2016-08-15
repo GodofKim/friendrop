@@ -15,6 +15,7 @@ const detailSchema = new Schema({
 // Define our model
 const profileSchema = new Schema({
   host: Schema.ObjectId,
+  email: String,
   image: [String],
   name: String,
   nickname: String,
