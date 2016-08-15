@@ -51,7 +51,7 @@ export function signupUser({ email, password}){
     .then(response => {
       dispatch({type:AUTH_USER});
       localStorage.setItem('token', response.data.token);
-      browserHistory.push('/feature');
+      browserHistory.push('/profile-edit');
     })
     .catch(error => {
       dispatch(authError(error.response.data.error));
