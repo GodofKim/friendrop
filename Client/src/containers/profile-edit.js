@@ -6,10 +6,7 @@ import * as actions from '../actions';
 class ProfileEdit extends Component {
 
   componentWillMount() {
-    if(this.props.profile){
-      var profile = this.props.profile;
-      this.props.fields.name.value = profile.name;
-    }
+    this.props.fetchProfile();
   }
 
   handleFormSubmit(formProps) {
