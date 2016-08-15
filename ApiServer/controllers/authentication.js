@@ -45,7 +45,8 @@ exports.signup = function(req, res, next){
         if(err) { return next(err);}
 
         const profile = new Profile({
-          host: thisUser._id
+          host: thisUser._id,
+          email: email
         });
 
         profile.save((err) => {
