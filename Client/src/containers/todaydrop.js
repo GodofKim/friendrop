@@ -9,7 +9,7 @@ class TodayDrop extends Component {
   }
 
   componentDidMount() {
-    setInterval(this.props.fetchDrops, 2000);
+    //setInterval(this.props.fetchDrops, 2000);
   }
 
   renderSlots() {
