@@ -24,7 +24,8 @@ class Login extends Component {
 
     return (
       <div>
-        <h1>Friendrop</h1>
+        <img src="https://s3.ap-northeast-2.amazonaws.com/friendrop/UI/friendrop-brand.png" width="350"/>
+        <hr/>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <fieldset className="form-group">
             <label>Email:</label>
@@ -39,7 +40,7 @@ class Login extends Component {
           {this.renderAlert()}
           <button action="submit" className="btn btn-primary">Log in</button>
         </form>
-        <img src="https://s3.ap-northeast-2.amazonaws.com/friendrop/UI/friendrop_logo.png" width="400"/>
+
       </div>
     );
   }
