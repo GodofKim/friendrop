@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-
+import ContactSlot from '../components/contactSlot';
 
 class Contact extends Component {
   componentWillMount() {
@@ -10,13 +10,13 @@ class Contact extends Component {
 
   renderSlots() {
     if(this.props.contacts){
+      this.props.contacts.sort((a,b) => {
+        return new Date(b.date) - new Date(a.date);
+      });
+
       return this.props.contacts.map((contact) => {
         return (
-          <li className="list-group-item" key={contact._id}>
-            <h3>{contact.nickname}</h3>
-            <h5>{contact.name}</h5>
-            <p>{contact.phone}</p>
-          </li>
+          <ContactSlot contact={contact} key={contact._id}/>
         );
       });
     }
