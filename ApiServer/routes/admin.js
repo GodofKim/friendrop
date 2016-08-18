@@ -26,80 +26,103 @@ router.get('/etc', function(req, res, next){
 router.post ('/send-letter', function (req, res, next) {
   const receiver = req.body.email;
 
-  User.findOne( {email: receiver}, function(err, user){
-    if(err) {
-      res.redirect('/admin/db', {message: 'no one matches.'});
-      throw err;
+  User.findOne( {email: req.body.senderEmail}, (err, sender) => {
+    if(!sender){
+      res.render('dbpage',{message_letter: '보낼 사람의 정보가 없습니다.'});
+    }else{
+      User.findOne( {email: receiver}, function(err, user){
+        if(err) { throw err;  }
+
+        if(!user) {
+          res.render('dbpage',{message_contact: '받을 사람의 정보가 없습니다.'});
+        }
+        else {
+          const letter = new Letter({
+            host: user._id,
+            email: req.body.senderEmail,
+            content: req.body.content,
+            date: Date.now()
+          });
+
+          letter.save(function (err) {
+            if (err) {
+              return next(err);
+            }
+
+            res.render('dbpage',{message_contact: '성공적으로 보냈습니다!'});
+          });
+        }
+      });
     }
-
-    const letter = new Letter({
-      host: user._id,
-      email: req.body.senderEmail,
-      content: req.body.content,
-      date: Date.now()
-    });
-
-    letter.save(function(err){
-      if (err) { return next(err);}
-
-      res.redirect('/admin/db');
-    });
   });
-
 });
 
 router.post ('/send-contact', function(req, res, next) {
   const receiver = req.body.email;
 
-  User.findOne( {email: receiver}, function(err, user){
-    if(err) {
-      res.redirect('/admin/db', {message: 'no one matches.'});
-      throw err;
+  User.findOne( {email: req.body.senderEmail}, (err, sender) => {
+    if(!sender){
+      res.render('dbpage',{message_contact: '보낼 사람의 정보가 없습니다.'});
     }
+    else{
+      User.findOne( {email: receiver}, function(err, user){
+        if(err) { throw err;}
 
-    const contact = new Contact({
-      host: user._id,
-      email: req.body.senderEmail,
-      date: Date.now()
-    });
+        if(!user) {
+          res.render('dbpage',{message_contact: '받을 사람의 정보가 없습니다.'});
+        }
+        else{
+          const contact = new Contact({
+            host: user._id,
+            email: req.body.senderEmail,
+            date: Date.now()
+          });
 
-    contact.save(function(err){
-      if (err) { return next(err);}
+          contact.save(function (err) {
+            if (err) {
+              return next(err);
+            }
+            res.render('dbpage',{message_contact: '성공적으로 보냈습니다!'});
+          });
+        }
 
-      res.redirect('/admin/db');
-    });
+      });
+    }
   });
 });
 
 router.post('/send-drop',function (req, res, next){
   const receiver = req.body.email;
 
-  const data = {};
-  data.date = Date.now(); // new Date.now() 가 아니라 그냥 Date.now(). 생각해보니 그러네 클래스의 메소드지 인스턴스의 메소드가 아니잖아
-  data.host = receiver;
-  data.email = req.body.senderEmail;
+  User.findOne({email: req.body.senderEmail},function(err, doc){
+    // handle data
+    if(err) throw err;
+    // find 에서 찾는 문서가 없는 것은 Error 가 아니라 그냥 null 이다. 주의.
+    if(doc){
+      User.findOne({email: receiver}, function(err, user) {
+        if(err) throw err;
 
+        if(user){
+          const drop = new Drop({
+            host: user._id,
+            email: req.body.senderEmail,
+            date: Date.now() // new Date.now()가 아니지. 인스턴스로 부터 가져오는 게 아니니까.
+          });
+          // 데이터베이스에 저장.
+          drop.save((err) => {
+            if (err) { return next(err);}
+            res.render('dbpage',{message_contact: '성공적으로 보냈습니다!'});
+          });
 
-
-  User.findOne( {email: receiver}, function(err, user){
-    if(err) {
-      res.redirect('/admin/db', {message: 'no one matches.'});
-      throw err;
+        }else{
+          res.render('dbpage', {message_drop: '받을 사람의 정보가 없습니다.'});
+        }
+      });
+    }else{
+      res.render('dbpage', {message_drop: '보낼 사람의 정보가 없습니다.'});
     }
-
-    const drop = new Drop({
-      host: user._id, // 아오 host는 이메일이 아니라 오브젝트 아이디였지
-      email: data.email,
-      date: data.date
-    });
-
-    drop.save(function(err){
-      if (err) { return next(err);}
-
-      res.redirect('/admin/db');
-    });
-
   });
+
 });
 
 
