@@ -1,11 +1,14 @@
 <div class="container">
   <div class="jumbotron custom">
       <h2>드랍 보내기</h2>
+      {{#if message_drop}}
+          <div class="alert alert-danger">{{message_drop}}</div>
+      {{/if}}
     <form action="/admin/send-drop" method="post">
       <fieldset class="form-group">
         <label>누구를 대상으로?(email) </label>
         <input class="form-control" name="email" />
-        {{message}}
+
       </fieldset>
       <fieldset class="form-group">
         <label>누구의 프로필을 보내는가? (email)</label>
@@ -17,11 +20,14 @@
 
     <div class="jumbotron custom">
         <h2>쪽지 보내기</h2>
+        {{#if message_letter}}
+            <div class="alert alert-danger">{{message_letter}}</div>
+        {{/if}}
         <form action="/admin/send-letter" method="post">
             <fieldset class="form-group">
                 <label>누구를 대상으로?(email) </label>
                 <input class="form-control" name="email" />
-                {{message}}
+
             </fieldset>
             <fieldset class="form-group">
                 <label>누가 보내는가? (email)</label>
@@ -37,11 +43,14 @@
 
     <div class="jumbotron custom">
         <h2>연락처 보내기</h2>
+        {{#if message_contact}}
+            <div class="alert alert-danger">{{message_contact}}</div>
+        {{/if}}
         <form action="/admin/send-contact" method="post">
             <fieldset class="form-group">
                 <label>누구를 대상으로?(email) </label>
                 <input class="form-control" name="email" />
-                {{message}}
+
             </fieldset>
             <fieldset class="form-group">
                 <label>누가 보내는가? (email)</label>
