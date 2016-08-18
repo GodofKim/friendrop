@@ -99,7 +99,10 @@ router.post('/profile', requireAuth, (req, res, next)=> {
 // Send Drops
 router.get('/drops', requireAuth, (req, res, next) => {
   Drop.find({host: req.user._id}, (err, drops) => {
-    if(err) throw err;
+    if(err) {
+      console.log("error: /drops");
+      throw err;
+    }
 
     var fetchData = JSON.parse(JSON.stringify(drops));
     var sendArray = [];
