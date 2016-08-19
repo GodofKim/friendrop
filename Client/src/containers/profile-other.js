@@ -8,13 +8,10 @@ import * as actions from '../actions';
 class ProfileOther extends Component {
   componentWillMount() {
     this.props.fetchProfileOther(this.props.params.id);
-    console.log(this.props.params.id);
   }
 
   renderProfile() {
-    //if () 해서 내용물이 있는지 없는지 꼭!! 반드시!! 확인해야한다 에러나지 않도록
     if(this.props.profile) {
-      console.log(profile);
       var profile = this.props.profile;
       return (
         <div>
@@ -22,7 +19,8 @@ class ProfileOther extends Component {
           <h4>{profile.nickname}</h4>
           <hr/>
           <h5>{profile.school} - {profile.major}</h5>
-
+          <button className="btn btn-primary">쪽지 보내기</button>
+          <button className="btn btn-primary">연락처 보내기</button>
         </div>
       );
     }
