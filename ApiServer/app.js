@@ -20,7 +20,7 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 // DB setup
-mongoose.connect('mongodb://Godof:horol123@ds029117.mlab.com:29117/apiserver');
+mongoose.connect('mongodb://GodofKim:practice@ds029117.mlab.com:29117/apiserver');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
