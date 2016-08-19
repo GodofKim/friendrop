@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="43cac62e-7345-49b6-a69f-ba2a599c83d8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Client/bundle.js" afterPath="$PROJECT_DIR$/Client/bundle.js" />
     </list>
     <ignored path="friendrop.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,9 +26,14 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ApiServer/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2156">
-              <caret line="98" column="13" selection-start-line="98" selection-start-column="13" selection-end-line="98" selection-end-column="13" />
-              <folding />
+            <state relative-caret-position="2574">
+              <caret line="117" column="13" selection-start-line="117" selection-start-column="13" selection-end-line="117" selection-end-column="13" />
+              <folding>
+                <marker date="1471614866753" expanded="true" signature="4059:4289" ph="{...}" />
+                <marker date="1471614866753" expanded="true" signature="4059:4397" ph="{...}" />
+                <marker date="1471614866753" expanded="true" signature="4059:4403" ph="{...}" />
+                <marker date="1471614866753" expanded="true" signature="4059:4407" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -59,7 +62,7 @@
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="41" selection-start-line="0" selection-start-column="41" selection-end-line="0" selection-end-column="41" />
+              <caret line="0" column="27" selection-start-line="0" selection-start-column="27" selection-end-line="0" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -611,12 +614,12 @@
       <workItem from="1471361793728" duration="3919000" />
       <workItem from="1471443811925" duration="1478000" />
       <workItem from="1471500394977" duration="14610000" />
-      <workItem from="1471613875346" duration="897000" />
+      <workItem from="1471613875346" duration="1098000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62084000" />
+    <option name="totallyTimeSpent" value="62285000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -1009,9 +1012,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ApiServer/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2156">
-          <caret line="98" column="13" selection-start-line="98" selection-start-column="13" selection-end-line="98" selection-end-column="13" />
-          <folding />
+        <state relative-caret-position="2574">
+          <caret line="117" column="13" selection-start-line="117" selection-start-column="13" selection-end-line="117" selection-end-column="13" />
+          <folding>
+            <marker date="1471614866753" expanded="true" signature="4059:4289" ph="{...}" />
+            <marker date="1471614866753" expanded="true" signature="4059:4397" ph="{...}" />
+            <marker date="1471614866753" expanded="true" signature="4059:4403" ph="{...}" />
+            <marker date="1471614866753" expanded="true" signature="4059:4407" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1026,7 +1034,7 @@
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="41" selection-start-line="0" selection-start-column="41" selection-end-line="0" selection-end-column="41" />
+          <caret line="0" column="27" selection-start-line="0" selection-start-column="27" selection-end-line="0" selection-end-column="27" />
           <folding />
         </state>
       </provider>
