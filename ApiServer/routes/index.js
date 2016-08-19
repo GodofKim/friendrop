@@ -65,13 +65,31 @@ router.get('/array', requireAuth, (req, res, next)=>{
 
 
 
-// Send Profile
+// Get Profile
 router.get('/profile', requireAuth, (req, res, next) => {
     Profile.findOne({host: req.user._id}, (err, profile) => {
-        //나중에 프로필에서 지울 목록은 다 지우고 보내줘라. 자기꺼면 아니고
+
         var temp = JSON.parse(JSON.stringify(profile));
         res.json({profile: temp});
     });
+});
+
+// Get one's profile
+router.get('/profile/:id', (req, res, next) => {
+  // id는 일단 이메일로 하자
+  Profile.findOne({email: req.params.id }, (err, profile) => {
+    if(err) {throw err;}
+    if(!profile){
+      console.log("그런 사람 없습니다");
+      res.status(404).send({error: 'Cannot find', email: req.params.id});
+    }
+    else {
+      //나중에 프로필에서 지울 목록은 다 지우고 보내줘라.
+      //사용자가 공개 거부한 것들.
+      var temp = JSON.parse(JSON.stringify(profile));
+      res.json({profile: temp});
+    }
+  });
 });
 
 // Edit Profile
@@ -115,6 +133,7 @@ router.get('/drops', requireAuth, (req, res, next) => {
 
         sendArray[i] = {
           _id: fetchProfile._id,
+          email: fetchProfile.email,
           name: fetchProfile.name,
           nickname: fetchProfile.nickname,
           gender: fetchProfile.gender,

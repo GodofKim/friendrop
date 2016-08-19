@@ -10,7 +10,8 @@ import {
   FETCH_PROFILE,
   FETCH_LETTERS,
   FETCH_CONTACTS,
-  EDIT_PROFILE
+  EDIT_PROFILE,
+  FETCH_PROFILE_OTHER
 } from './type';
 
 const ROOT_URL = 'http://localhost:3000';
@@ -129,6 +130,23 @@ export function fetchProfile() {
   }
 }
 
+export function fetchProfileOther(email){
+  return function(dispatch){
+    axios.get(`${ROOT_URL}/profile/${email}`, {
+      headers: { authorization : localStorage.getItem('token')}
+    })
+      .then(response => {
+        console.log("Action_fetchProfileOther : Success", response.data.profile);
+        dispatch({
+          type: FETCH_PROFILE_OTHER,
+          payload: response.data.profile
+        });
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
+  }
+}
 export function fetchDrops() {
   return function (dispatch){
     axios.get(`${ROOT_URL}/drops`, {
