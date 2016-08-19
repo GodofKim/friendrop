@@ -167,6 +167,7 @@ router.get('/letters', requireAuth, (req, res, next) => {
 
         sendArray[i] = {
           _id: fetchProfile._id, // for iterate key.
+          email: fetchProfile.email,
           name: fetchProfile.name,
           nickname: fetchProfile.nickname,
           content: letter.content,
@@ -198,6 +199,7 @@ router.get('/contacts', requireAuth, (req, res, next) => {
 
         sendArray[i] = {
           _id: fetchProfile._id, // for iterate key.
+          email: fetchProfile.email,
           name: fetchProfile.name,
           nickname: fetchProfile.nickname,
           phone: fetchProfile.phone,

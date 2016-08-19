@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 
 class LetterSlot extends Component {
   render() {
     var letter = this.props.letter;
-
+    var profilePath = '/profile/'+ letter.email;
     return(
       <div>
         <li className="list-group-item">
@@ -12,8 +13,9 @@ class LetterSlot extends Component {
           <p>{letter.content}</p>
           <p>{new Date(letter.date).getFullYear()}-{new Date(letter.date).getMonth()}
             -{new Date(letter.date).getDate()}</p>
+          <button className="btn btn-primary">내용 보기</button>
+          <Link className="btn btn-primary" to={profilePath}>프로필 보기</Link>
         </li>
-        <button className="btn btn-primary">내용 보기</button>
       </div>
     );
   }

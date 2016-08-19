@@ -171,7 +171,7 @@ export function fetchLetters() {
         headers: { authorization: localStorage.getItem('token')}
       })
       .then(response => {
-        console.log (response);
+        console.log ("Action-fetchLetters ", response);
         dispatch({
           type: FETCH_LETTERS,
           payload: response.data.letters
