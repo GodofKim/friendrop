@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import { Link } from 'react-router';
+import ProfileImageUpload from './profile-image-upload';
 
 class Profile extends Component {
   componentWillMount() {
@@ -27,7 +28,10 @@ class Profile extends Component {
     return (
       <div>
         <h1>Profile</h1>
-        <img src="https://goo.gl/O6e1TB" width="300px"/>
+        <hr/>
+        <div className="profile-image">
+          <ProfileImageUpload/>
+        </div>
         <hr/>
         {this.renderProfile()}
         <Link className="btn btn-primary" to="/profile-edit">Edit</Link>

@@ -7,6 +7,19 @@ const passport = require('passport');
 const requireAuth = passport.authenticate('jwt', { session: false});
 const requireSignin = passport.authenticate('local', {session:false});
 
+var multer = require('multer');
+var upload = multer({ dest: 'uploads/' });
+
+//AWS SDK
+var AWS = require('aws-sdk');
+AWS.config.update({
+  signatureVersion: 'v4',
+  accessKeyId: "AKIAIUBUREFWNTLFXUCA",
+  secretAccessKey: "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",
+});
+const s3 = new AWS.S3();
+const fs = require('fs');
+
 const User = require('../models/user');
 const Drop = require('../models/drop');
 const Profile = require('../models/profile');
@@ -113,6 +126,48 @@ router.post('/profile', requireAuth, (req, res, next)=> {
     });
 });
 
+// Upload profileImage
+router.post('/profile-image', requireAuth, upload.single('image'), (req,res)=>{
+  console.log("Image upload request");
+  console.log(req.user);
+  console.log("req.files:",req.file);
+
+  Profile.findOne({email: req.user.email},(err, profile)=>{
+    if(err) throw err;
+    if(!profile){
+      console.log("Find Profile Failed");
+      res.status(404).send("프로필이 없습니다.");
+      return;
+    }
+    console.log("Found Profile");
+
+    if(req.file){
+      var S3Upload = function(){
+        s3.upload({'Bucket':'friendrop',
+          'Key':req.file.filename.toString(),
+          'ACL':'public-read',
+          'Body': fs.createReadStream(req.file.path),
+          'ContentType':'image/png'}, (err,data)=>{
+            if(err) throw err;
+            fs.unlink(req.file.path);
+        });
+      };
+      //디비에 파일 이름 업로드. 배열이니까 $push써야함.
+      profile.update({$push: {image: req.file.filename}},(err)=> {
+        if(err) throw err;
+        //아마존으로 업로드
+        S3Upload();
+        console.log("image upload success");
+
+        res.status(200).send('upload success');
+      });
+    }else{
+      console.log("file doesn't exist.");
+      res.send("file does't exist.");
+    }
+
+  });
+});
 
 // Send Drops
 router.get('/drops', requireAuth, (req, res, next) => {

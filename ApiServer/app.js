@@ -8,6 +8,9 @@ var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
+var multer = require('multer');
+var upload = multer({ dest: 'uploads/' });
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var admin = require('./routes/admin');

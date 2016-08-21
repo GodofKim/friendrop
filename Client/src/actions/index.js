@@ -11,10 +11,10 @@ import {
   FETCH_LETTERS,
   FETCH_CONTACTS,
   EDIT_PROFILE,
-  FETCH_PROFILE_OTHER
+  FETCH_PROFILE_OTHER,
 } from './type';
 
-const ROOT_URL = 'http://localhost:3000';
+export const ROOT_URL = 'http://localhost:3000';
 
 export function loginUser({ email, password}) {
   //redux thunk -> dispatch를 더 잘이용하게 해준다?? 원래는 액크가 객체를 리턴해야되는데 함수를 리턴하게 해줌.
@@ -147,6 +147,29 @@ export function fetchProfileOther(email){
       });
   }
 }
+
+export function uploadProfileImage(files){
+  return function(dispatch){
+    console.log(files);
+
+    axios({
+      url: `${ROOT_URL}/profile-image`,
+      data: { files : files[0]},
+      method: 'post',
+      dataType : 'multipart/form-data',
+      responseType: 'json',
+      headers: { authorization: localStorage.getItem('token')}
+    })
+      .then(response => {
+        console.log("Action_uploadProfileImage : Success");
+        fetchProfile();
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
+  }
+}
+
 export function fetchDrops() {
   return function (dispatch){
     axios.get(`${ROOT_URL}/drops`, {
