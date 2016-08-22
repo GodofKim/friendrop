@@ -21,6 +21,10 @@ class ProfileImageUpload extends Component {
       .set({'authorization': localStorage.getItem('token')})
       .end((err, res) => {
         if (err) { console.error(err); }
+        console.log(res.text);
+
+        //이미지 업로드 성공 응답 => 프로필 다시 가져옴.
+        this.props.fetchProfile();
         return res;
       });
   }

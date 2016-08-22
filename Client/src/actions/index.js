@@ -148,28 +148,6 @@ export function fetchProfileOther(email){
   }
 }
 
-export function uploadProfileImage(files){
-  return function(dispatch){
-    console.log(files);
-
-    axios({
-      url: `${ROOT_URL}/profile-image`,
-      data: { files : files[0]},
-      method: 'post',
-      dataType : 'multipart/form-data',
-      responseType: 'json',
-      headers: { authorization: localStorage.getItem('token')}
-    })
-      .then(response => {
-        console.log("Action_uploadProfileImage : Success");
-        fetchProfile();
-      })
-      .catch(error => {
-        console.log(error.response);
-      });
-  }
-}
-
 export function fetchDrops() {
   return function (dispatch){
     axios.get(`${ROOT_URL}/drops`, {
