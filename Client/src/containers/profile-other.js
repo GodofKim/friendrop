@@ -4,10 +4,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import {IMAGE_URL} from './profile';
 
 class ProfileOther extends Component {
   componentWillMount() {
     this.props.fetchProfileOther(this.props.params.id);
+  }
+
+  renderImages() {
+    if(this.props.profile){
+      return this.props.profile.image.map((image) => {
+        var url = `${IMAGE_URL}/${image}`;
+        return (
+          <img src={url} height="250" key={image}/>
+        );
+      });
+    }
   }
 
   renderProfile() {
@@ -30,7 +42,7 @@ class ProfileOther extends Component {
     return (
       <div>
         <h1>Profile</h1>
-        <img src="https://goo.gl/O6e1TB" width="300px"/>
+        {this.renderImages()}
         <hr/>
         {this.renderProfile()}
       </div>
