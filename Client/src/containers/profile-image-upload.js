@@ -50,7 +50,7 @@ class ProfileImageUpload extends Component {
     return (
       <div>
         <Dropzone onDrop={this.onDrop.bind(this)} multiple={false}>
-          <div>Try dropping some files here, or click to select files to upload.</div>
+          <div>사진을 드랍하거나 이곳을 누르세요.</div>
         </Dropzone>
 
       </div>
