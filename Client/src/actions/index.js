@@ -37,7 +37,7 @@ export function loginUser({ email, password}) {
         dispatch(authError('Bad Login Info'));
       });
     // {email : email, password: password} shotcut.
-  }
+  };
 }
 
 export function signupUser({ email, password}){
@@ -73,14 +73,14 @@ export function logoutUser(){
 
   return {
     type: UNAUTH_USER
-  }
+  };
 }
 
 export function removeUser() {
   return function (dispatch){
     axios({
-      url: `${ROOT_URL}/user-remove`,
-      method: 'post',
+      url: `${ROOT_URL}/user`,
+      method: 'delete',
       responseType: 'json',
       headers: { authorization: localStorage.getItem('token')}
     })
@@ -91,7 +91,7 @@ export function removeUser() {
       .catch(error => {
         dispatch(authError(error.response.data.error));
       });
-  }
+  };
 }
 
 export function fetchMessage() {
@@ -108,7 +108,7 @@ export function fetchMessage() {
     .catch(error => {
       console.log(error.response);
     });
-  }
+  };
 }
 
 export function fetchProfile() {
@@ -127,7 +127,7 @@ export function fetchProfile() {
       .catch(error => {
         console.log(error.response);
       });
-  }
+  };
 }
 
 export function fetchProfileOther(email){
@@ -145,7 +145,7 @@ export function fetchProfileOther(email){
       .catch(error => {
         console.log(error.response);
       });
-  }
+  };
 }
 
 export function fetchDrops() {
@@ -163,7 +163,7 @@ export function fetchDrops() {
     .catch(error => {
       console.log(error.response);
     });
-  }
+  };
 }
 
 export function fetchLetters() {
@@ -181,7 +181,7 @@ export function fetchLetters() {
       .catch(error => {
         console.log(error.response);
       });
-  }
+  };
 }
 
 export function fetchContacts() {
@@ -199,7 +199,7 @@ export function fetchContacts() {
       .catch(error => {
         console.log(error.response);
       });
-  }
+  };
 }
 
 export function editProfile({ name, nickname, school, major}){

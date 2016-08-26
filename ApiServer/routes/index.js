@@ -36,7 +36,7 @@ router.get('/', requireAuth , (req, res, next)=>{
   res.send({ message: "서버로부터 보내지는 메시지입니다."});
 });
 
-router.post('/user-remove', requireAuth, (req, res, next) => {
+router.delete('/user', requireAuth, (req, res, next) => {
 
   Letter.remove({email: req.user.email}, (err)=> {
     if(err) throw err;
