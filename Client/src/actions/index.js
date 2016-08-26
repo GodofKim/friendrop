@@ -36,7 +36,7 @@ export function loginUser({ email, password}) {
         // - Show an error to the user
         dispatch(authError('Bad Login Info'));
       });
-    // {email : email, password: password} shotcut.
+    // {email : email, password: password} shortcut.
   };
 }
 
@@ -49,12 +49,12 @@ export function signupUser({ email, password}){
       method: 'post',
       responseType: 'json'
     })
-    .then(response => {
+    .then((response) => {
       dispatch({type:AUTH_USER});
       localStorage.setItem('token', response.data.token);
       browserHistory.push('/profile-edit');
     })
-    .catch(error => {
+    .catch((error) => {
       dispatch(authError(error.response.data.error));
     });
   };
