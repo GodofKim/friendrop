@@ -27,7 +27,7 @@ mongoose.connect('mongodb://GodofKim:practice@ds029117.mlab.com:29117/apiserver'
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-//app.use(logger());//접속된 컴 로그 보고싶으면 'combined' 넣으셈. 엥 지워도 보이네. 자체를 주석처리했다. 
+//app.use(logger());//접속된 컴 로그 보고싶으면 'combined' 넣으셈. 엥 지워도 보이네. 자체를 주석처리했다.
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -45,7 +45,7 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-// error handlers
+/* error handlers */
 
 // development error handler
 // will print stacktrace
