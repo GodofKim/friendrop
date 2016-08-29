@@ -269,7 +269,7 @@ router.post ('/letter', requireAuth, function (req, res, next) {
 
 // Send Contacts
 router.get('/contacts', requireAuth, (req, res, next) => {
-  Letter.find({host: req.user._id}, (err, contacts) => {
+  Contact.find({host: req.user._id}, (err, contacts) => {
     if(err) throw err;
 
     var fetchData = JSON.parse(JSON.stringify(contacts));
