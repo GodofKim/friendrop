@@ -9,3 +9,4 @@ export const FETCH_LETTERS = 'fetch_letters';
 export const FETCH_CONTACTS = 'fetch_contacts';
 export const EDIT_PROFILE = 'edit_profile';
 export const FETCH_PROFILE_OTHER = 'fetch_profile_other';
+export const SEND_LETTER = 'send_letter';

@@ -7,6 +7,20 @@ import * as actions from '../actions';
 import {IMAGE_URL} from './profile';
 
 class ProfileOther extends Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      isLetterFormOpened : false,
+      letterContent : ''
+    };
+
+    this.toggleLetterForm = this.toggleLetterForm.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.sendLetter = this.sendLetter.bind(this);
+  }
+
   componentWillMount() {
     this.props.fetchProfileOther(this.props.params.id);
   }
@@ -21,7 +35,7 @@ class ProfileOther extends Component {
       });
     }
   }
-
+  
   renderProfile() {
     if(this.props.profile) {
       var profile = this.props.profile;
@@ -31,22 +45,65 @@ class ProfileOther extends Component {
           <h4>{profile.nickname}</h4>
           <hr/>
           <h5>{profile.school} - {profile.major}</h5>
-          <button className="btn btn-primary">쪽지 보내기</button>
+          <button className="btn btn-primary" onClick={this.toggleLetterForm}>쪽지 보내기</button>
           <button className="btn btn-primary">연락처 보내기</button>
         </div>
       );
     }
   }
 
+  toggleLetterForm(){
+    this.setState({
+      isLetterFormOpened: !this.state.isLetterFormOpened
+    });
+
+    console.log(this.state.isLetterFormOpened);
+  }
+
+  handleKeyPress(e) {
+    if(e.charCode==13) {
+      this.sendLetter();
+    }
+  }
+
+  handleChange(e) {
+    this.setState({
+      letterContent: e.target.value
+    });
+  }
+
+  sendLetter(){
+    let temp = {
+      content: this.state.letterContent,
+      receiver: this.props.params.id
+    };
+
+    this.props.sendLetter(temp);
+
+    this.setState({
+      letterContent: ''
+    });
+  }
+
   render(){
+    const letterForm = (
+      <var className="letter-form">
+        <label>쪽지</label>
+        <input type="text" name="content" onChange={this.handleChange} onKeyPress={this.handleKeyPress}
+               value={this.state.letterContent}/>
+        <button onClick={this.sendLetter} >Send</button>
+        <button onClick={this.toggleLetterForm}>Cancel</button>
+      </var>
+    );
+
     return (
       <div>
         <h1>Profile</h1>
         {this.renderImages()}
         <hr/>
         {this.renderProfile()}
+        {this.state.isLetterFormOpened? letterForm: null}
       </div>
-
     );
   }
 }

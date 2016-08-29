@@ -12,6 +12,7 @@ import {
   FETCH_CONTACTS,
   EDIT_PROFILE,
   FETCH_PROFILE_OTHER,
+  SEND_LETTER
 } from './type';
 
 export const ROOT_URL = 'http://localhost:3000';
@@ -180,6 +181,25 @@ export function fetchLetters() {
       })
       .catch(error => {
         console.log(error.response);
+      });
+  };
+}
+
+export function sendLetter({content, receiver}) {
+  return function(dispatch){
+    axios({
+      url: `${ROOT_URL}/letter`,
+      data: { content, receiver },
+      method: 'post',
+      responseType: 'json',
+      headers: { authorization: localStorage.getItem('token')}
+    })
+      .then(response => {
+
+
+      })
+      .catch(error => {
+        dispatch(authError(error.response.data.error));
       });
   };
 }

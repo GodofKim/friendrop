@@ -14,8 +14,8 @@ var upload = multer({ dest: 'uploads/' });
 var AWS = require('aws-sdk');
 AWS.config.update({
   signatureVersion: 'v4',
-  accessKeyId: "",
-  secretAccessKey: ""
+  accessKeyId: "AKIAIGPUKZE3YFIDLRZQ",
+  secretAccessKey: "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"
 });
 const s3 = new AWS.S3();
 const fs = require('fs');
@@ -219,7 +219,7 @@ router.get('/letters', requireAuth, (req, res, next) => {
         var fetchProfile = JSON.parse(JSON.stringify(profile));
 
         sendArray[i] = {
-          _id: fetchProfile._id, // for iterate key.
+          _id: letter._id, // for iterate key. => 프로필 아이디가 아니라 쪽지 아이디여야 유니크하지.
           email: fetchProfile.email,
           name: fetchProfile.name,
           nickname: fetchProfile.nickname,
@@ -229,10 +229,40 @@ router.get('/letters', requireAuth, (req, res, next) => {
 
         i ++;
         if( i == times ){
-          res.json({letters: sendArray});
+          res.json({letters: sendArray}); // ---- 이 방법이 맘에들지 않는다면 요청/응답을 두번에 걸쳐서 하는 방법도 있다.
         }
       });
     });
+  });
+});
+
+//Post Letter
+router.post ('/letter', requireAuth, function (req, res, next) {
+  const receiver = req.body.receiver;
+  const content = req.body.content;
+
+  User.findOne({email: receiver}, (err, receiver) => {
+    if(err) { return next(err);}
+
+    if(!receiver){
+      res.status(404);
+      res.send("Receiver not found");
+    }else{
+      const letter = new Letter({
+        host: receiver._id,
+        email: req.user.email, // 보낸 사람.
+        content: content,
+        date: Date.now()
+      });
+
+      letter.save((err) =>{
+        if(err) { return next(err);}
+
+        console.log('Letter sent!')
+        res.status(200);
+        res.send("sent!")
+      });
+    }
   });
 });
 
