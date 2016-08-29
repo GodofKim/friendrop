@@ -281,7 +281,7 @@ router.get('/contacts', requireAuth, (req, res, next) => {
         var fetchProfile = JSON.parse(JSON.stringify(profile));
 
         sendArray[i] = {
-          _id: fetchProfile._id, // for iterate key.
+          _id: contact._id, // for iterate key. => 프로필 아이디가 아니라 연락처 아이디여야 유니크하지.
           email: fetchProfile.email,
           name: fetchProfile.name,
           nickname: fetchProfile.nickname,
