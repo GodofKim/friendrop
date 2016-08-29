@@ -241,13 +241,13 @@ export function sendContact({receiver}) {
   };
 }
 
-export function editProfile({ name, nickname, school, major}){
+export function editProfile({ name, nickname, school, major, phone}){
   return function(dispatch){
     //axios 최신 버전부터 바뀜.
     console.log("action work?");
     axios({
       url: `${ROOT_URL}/profile`,
-      data: {name, nickname, school, major},
+      data: {name, nickname, school, major, phone},
       method: 'post',
       responseType: 'json',
       headers: { authorization: localStorage.getItem('token')}

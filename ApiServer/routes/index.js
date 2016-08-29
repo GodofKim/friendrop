@@ -114,7 +114,8 @@ router.post('/profile', requireAuth, (req, res, next)=> {
         "name": req.body.name,
         "nickname": req.body.nickname,
         "school": req.body.school,
-        "major": req.body.major
+        "major": req.body.major,
+        "phone" : req.body.phone
       }
     }, (err) => {
       if(err) {

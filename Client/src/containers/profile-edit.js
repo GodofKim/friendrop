@@ -10,7 +10,6 @@ class ProfileEdit extends Component {
   }
 
   handleFormSubmit(formProps) {
-    console.log("handleFormSubmit: WWWWKKWKWK");
     this.props.editProfile(formProps);
   }
 
@@ -29,7 +28,7 @@ class ProfileEdit extends Component {
   render(){
     if(this.props.profile) {
 
-      const { handleSubmit, fields: {name, nickname, school, major} } = this.props;
+      const { handleSubmit, fields: {name, nickname, school, major, phone} } = this.props;
 
       return (
         <div>
@@ -50,6 +49,10 @@ class ProfileEdit extends Component {
             <fieldset className="form-group">
               <label>Major </label>
               <input className="form-control" {...major}/>
+            </fieldset>
+            <fieldset className="form-group">
+              <label>Phone </label>
+              <input className="form-control" {...phone}/>
             </fieldset>
 
             {this.renderAlert()}
@@ -74,5 +77,5 @@ function mapStateToProps (state){
 
 export default reduxForm({
   form: 'profile-edit',
-  fields: ['name','nickname','school','major']
+  fields: ['name','nickname','school','major','phone']
 }, mapStateToProps, actions)(ProfileEdit);
