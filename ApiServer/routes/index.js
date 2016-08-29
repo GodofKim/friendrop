@@ -208,7 +208,7 @@ router.get('/drops', requireAuth, (req, res, next) => {
 //Send Letters
 router.get('/letters', requireAuth, (req, res, next) => {
   Letter.find({host: req.user._id}, (err, letters) => {
-    if(err) throw err;
+    if(err) return next(err);
 
     var fetchData = JSON.parse(JSON.stringify(letters));
     var sendArray = [];
@@ -259,7 +259,7 @@ router.post ('/letter', requireAuth, function (req, res, next) {
       letter.save((err) =>{
         if(err) { return next(err);}
 
-        console.log('Letter sent!')
+        console.log('Letter sent!');
         res.status(200);
         res.send("sent!")
       });
