@@ -316,12 +316,18 @@ router.post ('/contact', requireAuth, function (req, res, next) {
         date: Date.now()
       });
 
-      contact.save((err) =>{
-        if(err) { return next(err);}
+      Contact.findOne({ host: contact.host, email: contact.email}, (err, isExist) => {
+        if(isExist){
+          res.send("already exists."); // 일단 여기서 끝내고 나중에 클라이언트로 알림 뜨게 만들어라.
+        }else{
+          contact.save((err) =>{
+            if(err) { return next(err);}
 
-        console.log('contact sent!');
-        res.status(200);
-        res.send("sent!")
+            console.log('contact sent!');
+            res.status(200);
+            res.send("sent!")
+          });
+        }
       });
     }
   });
