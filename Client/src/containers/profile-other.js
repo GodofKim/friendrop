@@ -19,6 +19,7 @@ class ProfileOther extends Component {
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.sendLetter = this.sendLetter.bind(this);
+    this.sendContact = this.sendContact.bind(this);
   }
 
   componentWillMount() {
@@ -35,22 +36,7 @@ class ProfileOther extends Component {
       });
     }
   }
-  
-  renderProfile() {
-    if(this.props.profile) {
-      var profile = this.props.profile;
-      return (
-        <div>
-          <h3>{profile.name}</h3>
-          <h4>{profile.nickname}</h4>
-          <hr/>
-          <h5>{profile.school} - {profile.major}</h5>
-          <button className="btn btn-primary" onClick={this.toggleLetterForm}>쪽지 보내기</button>
-          <button className="btn btn-primary">연락처 보내기</button>
-        </div>
-      );
-    }
-  }
+
 
   toggleLetterForm(){
     this.setState({
@@ -83,6 +69,29 @@ class ProfileOther extends Component {
     this.setState({
       letterContent: ''
     });
+  }
+
+  sendContact(){
+    let temp = { receiver: this.props.params.id };
+
+    this.props.sendContact(temp);
+  }
+
+
+  renderProfile() {
+    if(this.props.profile) {
+      var profile = this.props.profile;
+      return (
+        <div>
+          <h3>{profile.name}</h3>
+          <h4>{profile.nickname}</h4>
+          <hr/>
+          <h5>{profile.school} - {profile.major}</h5>
+          <button className="btn btn-primary" onClick={this.toggleLetterForm}>쪽지 보내기</button>
+          <button className="btn btn-primary" onClick={this.sendContact}>연락처 보내기</button>
+        </div>
+      );
+    }
   }
 
   render(){

@@ -222,6 +222,25 @@ export function fetchContacts() {
   };
 }
 
+export function sendContact({receiver}) {
+  return function(dispatch){
+    axios({
+      url: `${ROOT_URL}/contact`,
+      data: { receiver },
+      method: 'post',
+      responseType: 'json',
+      headers: { authorization: localStorage.getItem('token')}
+    })
+      .then(response => {
+
+
+      })
+      .catch(error => {
+        dispatch(authError(error.response.data.error));
+      });
+  };
+}
+
 export function editProfile({ name, nickname, school, major}){
   return function(dispatch){
     //axios 최신 버전부터 바뀜.

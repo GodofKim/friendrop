@@ -298,5 +298,32 @@ router.get('/contacts', requireAuth, (req, res, next) => {
   });
 });
 
+//Post Contact
+router.post ('/contact', requireAuth, function (req, res, next) {
+  const receiver = req.body.receiver;
+
+  User.findOne({email: receiver}, (err, receiver) => {
+    if(err) { return next(err);}
+
+    if(!receiver){
+      res.status(404);
+      res.send("Receiver not found");
+    }else{
+      const contact = new Contact({
+        host: receiver._id,
+        email: req.user.email, // 보낸 사람.
+        date: Date.now()
+      });
+
+      contact.save((err) =>{
+        if(err) { return next(err);}
+
+        console.log('contact sent!');
+        res.status(200);
+        res.send("sent!")
+      });
+    }
+  });
+});
 
 module.exports = router;
