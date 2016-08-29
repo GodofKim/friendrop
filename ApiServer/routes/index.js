@@ -186,7 +186,7 @@ router.get('/drops', requireAuth, (req, res, next) => {
         var fetchProfile = JSON.parse(JSON.stringify(profile));
 
         sendArray[i] = {
-          _id: fetchProfile._id,
+          _id: drop._id,
           email: fetchProfile.email,
           name: fetchProfile.name,
           nickname: fetchProfile.nickname,
