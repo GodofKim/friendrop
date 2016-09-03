@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import * as actions from '../../actions';
+import { browserHistory } from 'react-router';
 
 class Login extends Component {
+
+  componentWillMount(){
+    if(this.props.authenticated){
+      browserHistory.push('/todaydrop');
+    }
+  }
+
   handleFormSubmit({email, password}){
     console.log(email, password);
     // Need to do something to log user in.
@@ -47,7 +55,8 @@ class Login extends Component {
 }
 
 function mapStateToProps(state) {
-  return { errorMessage: state.auth.error };
+  return { authenticated: state.auth.authenticated,
+    errorMessage: state.auth.error };
 }
 
 export default reduxForm({
